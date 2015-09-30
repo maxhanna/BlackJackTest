@@ -58,8 +58,8 @@ public class WebServer {
 							// this blank line signals the end of the headers
 							out.println("");
 							// Send the HTML page
-							out.println("<H1>Welcome to the Black Jack Table</H1>");
-							out.println("<H2>Welcome "+user+"</H2>");
+							out.println("<html><head></head><body><H1>Welcome to the Black Jack Table</H1>");
+							out.println("<H2>Welcome "+user+"</H2></body></html>");
 
 
 							out.flush();
@@ -77,11 +77,11 @@ public class WebServer {
 							// this blank line signals the end of the headers
 							out.println("");
 							// Send the HTML page
-							out.println("<H1>Welcome to the Black Jack Table</H1>");
+							out.println("<html><head></head><body><H1>Welcome to the Black Jack Table</H1>");
 							out.println("<H2>Enter A Username</H2>");
 							out.println("<form>Username: <input type=\"text\""
 									+ " id=\"username\" name=\"username\"><br>"
-									+ "<input type=\"submit\" value=\"Submit\"></form>");
+									+ "<input type=\"submit\" value=\"Submit\"></form></body></html>");
 							out.flush();
 							//remote.close();
 							break;
