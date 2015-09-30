@@ -1,4 +1,5 @@
 package Server;
+import Client.ClientVariables;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -6,6 +7,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class WebServer {
+	String serverAddress = "localhost";
+	ClientVariables model = new ClientVariables();
 
 	protected void start() {
 		ServerSocket s;
@@ -20,11 +23,12 @@ public class WebServer {
 			return;
 		}
 
-		System.out.println("Waiting for connection");
+		System.out.println("Waiting for requests");
 		for (;;) {
 			try {
 				// wait for a connection
 				Socket remote = s.accept();
+				System.out.println("----------- REQUEST --------");
 				// remote is now the connected socket
 				BufferedReader in = new BufferedReader(new InputStreamReader(
 						remote.getInputStream()));
@@ -37,10 +41,15 @@ public class WebServer {
 				String  thisLine = null;
 				try{
 					while ((thisLine = in.readLine()) != null && !remote.isClosed()) {
-						
-						if (thisLine.contains("GET /?username="))
+						System.out.println(thisLine);
+						if (thisLine.contains("?username="))
 						{
 							System.out.println(thisLine);
+							String user = thisLine;
+							user = user.replace("GET /?username=", "");
+							String[] tokens = user.split(" ");
+							user = tokens[0];
+
 							// Send the response
 							// Send the headers
 							out.println("HTTP/1.0 200 OK");
@@ -50,12 +59,11 @@ public class WebServer {
 							out.println("");
 							// Send the HTML page
 							out.println("<H1>Welcome to the Black Jack Table</H1>");
-							out.println("<H2>Enter A Username</H2>");
-							out.println("<form>Username: <input type=\"text\""
-									+ " id=\"username\" name=\"username\"><br>"
-									+ "<input type=\"submit\" value=\"Submit\"></form>");
+							out.println("<H2>Welcome "+user+"</H2>");
+
+
 							out.flush();
-							remote.close();
+						//	remote.close();
 							break;
 						}
 						else if (thisLine.contains("GET / HTTP"))
@@ -75,11 +83,10 @@ public class WebServer {
 									+ " id=\"username\" name=\"username\"><br>"
 									+ "<input type=\"submit\" value=\"Submit\"></form>");
 							out.flush();
-							remote.close();
+							//remote.close();
 							break;
 						}
-					}   
-					
+					}       
 				}catch(Exception e){
 					e.printStackTrace();
 				}
