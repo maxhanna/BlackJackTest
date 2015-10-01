@@ -49,10 +49,11 @@ public class WebServer {
 							String table = "";
 							user = user.replace("GET /?join=", "");
 							String[] tokens1 = user.split(" ");
-							String[] tokens = tokens1[0].split("\\+");
+							String[] tokens = tokens1[0].split("\\&");
 							user = tokens[0];
-							for (int parts = 2; parts<tokens.length; parts++)
-								table = table + " " + tokens[parts];
+							table = tokens[1];
+							table = table.replace("table=", "");
+							table = table.replace("+", " ");
 							table.trim();
 							// Send the response
 							// Send the headers
@@ -66,11 +67,39 @@ public class WebServer {
 							
 							out.println("<H2>Welcome "+user+"</H2>");
 
-							out.println("</center></body></html>");
 								
 
+							if (model.gamesInProgress.get(table)!=null 
+									&& model.gamesInProgress.get(table)==false)
+							{
+								model.gamesInProgress.remove(table);
+								model.gamesInProgress.put(table, true);
+								System.out.println("Initialize game table: "+table);
+							}
+
+							out.println("</center></body></html>");
 							out.flush();
 							//	remote.close();
+							break;
+						}
+						else if (thisLine.contains("GET /?username=Dealer")||thisLine.contains("GET /?username=dealer"))
+						{
+							System.out.println(thisLine);
+							// Send the response
+							// Send the headers
+							out.println("HTTP/1.0 200 OK");
+							out.println("Content-Type: text/html");
+							out.println("Server: Bot");
+							// this blank line signals the end of the headers
+							out.println("");
+							// Send the HTML page
+							out.println("<html><head></head><body><H1>Welcome to the Black Jack Game</H1>");
+							out.println("<H2><font color = red>Invalid Username Chosen</font></H2>");
+							out.println("<form>Username: <input type=\"text\""
+									+ " id=\"username\" name=\"username\"><br>"
+									+ "<input type=\"submit\" value=\"Submit\"></form></body></html>");
+							out.flush();
+							//remote.close();
 							break;
 						}
 						else if (thisLine.contains("GET /?username="))
@@ -98,7 +127,8 @@ public class WebServer {
 									+ "<br>"+model.rooms.get(room)
 									+ "/6 Currently playing"
 									+ "<form>"
-									+  "<input type=\"hidden\" name=\"join\" value=\""+user+" table "+room+"\">"
+									+  "<input type=\"hidden\" name=\"join\" value=\""+user+"\">"
+									+  "<input type=\"hidden\" name=\"table\" value=\""+room+"\">"
 									+  "<input type=\"submit\" value=\"Join\">"
 									+ "</form>");
 							}
