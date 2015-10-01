@@ -8,7 +8,7 @@ import java.net.Socket;
 
 public class WebServer {
 	String serverAddress = "localhost";
-	ClientVariables model = new ClientVariables();
+	BlackJackVariables model = new BlackJackVariables();
 
 	protected void start() {
 		ServerSocket s;
@@ -42,7 +42,38 @@ public class WebServer {
 				try{
 					while ((thisLine = in.readLine()) != null && !remote.isClosed()) {
 						System.out.println(thisLine);
-						if (thisLine.contains("?username="))
+						if (thisLine.contains("GET /?join="))
+						{
+							System.out.println(thisLine);
+							String user = thisLine;
+							String table = "";
+							user = user.replace("GET /?join=", "");
+							String[] tokens1 = user.split(" ");
+							String[] tokens = tokens1[0].split("\\+");
+							user = tokens[0];
+							for (int parts = 2; parts<tokens.length; parts++)
+								table = table + " " + tokens[parts];
+							table.trim();
+							// Send the response
+							// Send the headers
+							out.println("HTTP/1.0 200 OK");
+							out.println("Content-Type: text/html");
+							out.println("Server: Bot");
+							// this blank line signals the end of the headers
+							out.println("");
+							// Send the HTML page
+							out.println("<html><head></head><body><H1>"+table+"</H1>");
+							
+							out.println("<H2>Welcome "+user+"</H2>");
+
+							out.println("</center></body></html>");
+								
+
+							out.flush();
+							//	remote.close();
+							break;
+						}
+						else if (thisLine.contains("GET /?username="))
 						{
 							System.out.println(thisLine);
 							String user = thisLine;
@@ -58,12 +89,24 @@ public class WebServer {
 							// this blank line signals the end of the headers
 							out.println("");
 							// Send the HTML page
-							out.println("<html><head></head><body><H1>Welcome to the Black Jack Table</H1>");
-							out.println("<H2>Welcome "+user+"</H2></body></html>");
-
+							out.println("<html><head></head><body><H1>Lobby</H1>");
+							
+							out.println("<H2>Welcome "+user+"</H2>");
+							for (String room : model.rooms.keySet())
+							{
+								out.println("<center>"+room
+									+ "<br>"+model.rooms.get(room)
+									+ "/6 Currently playing"
+									+ "<form>"
+									+  "<input type=\"hidden\" name=\"join\" value=\""+user+" table "+room+"\">"
+									+  "<input type=\"submit\" value=\"Join\">"
+									+ "</form>");
+							}
+							out.println("</center></body></html>");
+								
 
 							out.flush();
-						//	remote.close();
+							//	remote.close();
 							break;
 						}
 						else if (thisLine.contains("GET / HTTP"))
@@ -90,7 +133,7 @@ public class WebServer {
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-				
+
 			} catch (Exception e) {
 				System.out.println("Error: " + e);
 			}
