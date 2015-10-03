@@ -64,17 +64,103 @@ public class WebServer {
 							out.println("");
 							// Send the HTML page
 							out.println("<html><head></head><body><H1>"+table+"</H1>");
-							
+
 							out.println("<H2>Welcome "+user+"</H2>");
-
+							out.println("<br>");
+							
 								
-
-							if (model.gamesInProgress.get(table)!=null 
-									&& model.gamesInProgress.get(table)==false)
+							if (model.rooms.get(table)>5)
 							{
-								model.gamesInProgress.remove(table);
-								model.gamesInProgress.put(table, true);
+								out.println("<br>Room is currently full<br>");
+							}
+							if (model.roomsPhase.get(table)!=null 
+									&& model.roomsPhase.get(table)==0)
+							{
+								model.roomsPhase.remove(table);
+								model.roomsPhase.put(table, 1);
+								model.hands.put("Dealer,"+table, model.serveCards(model.deck));
 								System.out.println("Initialize game table: "+table);
+							}
+							if (model.roomsPhase.get(table)!=null 
+									&& model.roomsPhase.get(table)<2)
+							{
+								if (model.rooms.get(table)<6)
+									model.hands.put(user+","+table,model.serveCards(model.deck));
+								for (String userHands:model.hands.keySet())
+								{
+									if (userHands.contains(","+table))
+									{
+										if (userHands.contains(user+","+table))
+										{
+											String theHand = model.hands.get(userHands);
+											theHand.replace(",", " ");
+											theHand = theHand.replace("Ace of spades", "<img src=cards/aceofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("King of spades", "<img src=cards/kingofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("Queen of spades", "<img src=cards/queenofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("Jack of spades", "<img src=cards/jackofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("10 of spades", "<img src=cards/10ofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("9 of spades", "<img src=cards/9ofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("8 of spades", "<img src=cards/8ofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("7 of spades", "<img src=cards/7ofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("6 of spades", "<img src=cards/6ofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("5 of spades", "<img src=cards/5ofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("4 of spades", "<img src=cards/4ofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("3 of spades", "<img src=cards/3ofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("2 of spades", "<img src=cards/2ofspades.jpg width=100 height=235>");
+											theHand = theHand.replace("Ace of hearts", "<img src=cards/aceofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("King of hearts", "<img src=cards/kingofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("Queen of hearts", "<img src=cards/queenofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("Jack of hearts", "<img src=cards/jackofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("10 of hearts", "<img src=cards/10ofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("9 of hearts", "<img src=cards/9ofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("8 of hearts", "<img src=cards/8ofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("7 of hearts", "<img src=cards/7ofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("6 of hearts", "<img src=cards/6ofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("5 of hearts", "<img src=cards/5ofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("4 of hearts", "<img src=cards/4ofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("3 of hearts", "<img src=cards/3ofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("2 of hearts", "<img src=cards/2ofhearts.jpg width=100 height=235>");
+											theHand = theHand.replace("Ace of clubs", "<img src=cards/aceofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("King of clubs", "<img src=cards/kingofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("Queen of clubs", "<img src=cards/queenofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("Jack of clubs", "<img src=cards/jackofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("10 of clubs", "<img src=cards/10ofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("9 of clubs", "<img src=cards/9ofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("8 of clubs", "<img src=cards/8ofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("7 of clubs", "<img src=cards/7ofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("6 of clubs", "<img src=cards/6ofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("5 of clubs", "<img src=cards/5ofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("4 of clubs", "<img src=cards/4ofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("3 of clubs", "<img src=cards/3ofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("2 of clubs", "<img src=cards/2ofclubs.jpg width=100 height=235>");
+											theHand = theHand.replace("Ace of diamonds", "<img src=cards/aceofdiamonds.jpg width=100 height=235>");
+											theHand = theHand.replace("King of diamonds", "<img src=cards/kingofdiamonds.jpg width=100 height=235>");
+											theHand = theHand.replace("Queen of diamonds", "<img src=cards/queenofdiamonds.jpg width=100 height=235>");
+											theHand = theHand.replace("Jack of diamonds", "<img src=cards/jackofdiamonds.jpg width=100 height=235>");
+											theHand = theHand.replace("10 of diamonds", "<img src=cards/10ofdiamonds.jpg width=100 height=235>");
+											theHand = theHand.replace("9 of diamonds", "<img src=cards/9ofdiamonds.jpg width=100 height=235>");
+											theHand = theHand.replace("8 of diamonds", "<img src=cards/8ofdiamonds.jpg width=100 height=235>");
+											theHand = theHand.replace("7 of diamonds", "<img src=cards/7ofdiamonds.jpg width=100 height=235>");
+											theHand = theHand.replace("6 of diamonds", "<img src=cards/6ofdiamonds.jpg width=100 height=235>");
+											theHand = theHand.replace("5 of diamonds", "<img src=cards/5ofdiamonds.jpg width=100 height=235>");
+											theHand = theHand.replace("4 of diamonds", "<img src=cards/4ofdiamonds.jpg width=100 height=235>");
+											theHand = theHand.replace("3 of diamonds", "<img src=cards/3ofdiamonds.jpg width=100 height=235>");
+											theHand = theHand.replace("2 of diamonds", "<img src=cards/2ofdiamonds.jpg width=100 height=235>");
+											
+											String theUserName = userHands.replace(","+table,"");
+											out.println("<br>"+theUserName+" " + model.hands.get(userHands));
+										
+										}
+										else
+										{
+											String theHand = model.hands.get(userHands);
+											String theUserName = userHands.replace(","+table,"");
+											out.println("<br>"+theUserName+" " + theHand);
+										
+										}
+									}
+								}
+								
 							}
 
 							out.println("</center></body></html>");

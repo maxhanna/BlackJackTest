@@ -6,8 +6,21 @@ import java.util.HashMap;
 
 public class BlackJackVariables {
 	public HashMap<String,Integer> rooms = new HashMap<String,Integer>();
-	public HashMap<String,Boolean> gamesInProgress = new HashMap<String,Boolean>();
+	public HashMap<String,Integer> roomsPhase = new HashMap<String,Integer>();
 	public ArrayList<String> deck = new ArrayList<String>();
+	public HashMap<String,String> hands = new HashMap<String,String>();
+	
+	public String serveCards(ArrayList<String> deckOfCards){
+		if (deckOfCards.size() > 1)
+		{
+			String cards = ("" + deckOfCards.get(deckOfCards.size()-1) + "," + deckOfCards.get(deckOfCards.size()-2));
+			deckOfCards.remove(deckOfCards.size()-1);
+			deckOfCards.remove(deckOfCards.size()-1);
+			return cards;
+		}
+		else
+			return "";
+	}
 	public void createDeck(ArrayList<String> deck){
 		deck.clear();
 		for (int suit = 0; suit < 5; suit ++){
@@ -78,7 +91,7 @@ public class BlackJackVariables {
 	public BlackJackVariables()
 	{
 		rooms.put("Carleton Room", 0);
-		gamesInProgress.put("Carleton Room", false);
+		roomsPhase.put("Carleton Room", 0);
 		createDeck(deck);
 	}
 
