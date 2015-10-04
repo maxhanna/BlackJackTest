@@ -9,6 +9,7 @@ public class BlackJackVariables {
 	public HashMap<String,Integer> roomsPhase = new HashMap<String,Integer>();
 	public ArrayList<String> deck = new ArrayList<String>();
 	public HashMap<String,String> hands = new HashMap<String,String>();
+	public HashMap<String,String> stays = new HashMap<String,String>();
 	
 	public String serveCards(ArrayList<String> deckOfCards){
 		if (deckOfCards.size() > 1)
@@ -17,6 +18,16 @@ public class BlackJackVariables {
 			deckOfCards.remove(deckOfCards.size()-1);
 			deckOfCards.remove(deckOfCards.size()-1);
 			return cards;
+		}
+		else
+			return "";
+	}
+	public String hit(ArrayList<String> deckOfCards){
+		if (deckOfCards.size() > 0)
+		{
+			String card = ("" + deckOfCards.get(deckOfCards.size()-1));
+			deckOfCards.remove(deckOfCards.size()-1);
+			return card;
 		}
 		else
 			return "";
@@ -91,6 +102,7 @@ public class BlackJackVariables {
 	public BlackJackVariables()
 	{
 		rooms.put("Carleton Room", 0);
+		stays.put("Carleton Room", "");
 		roomsPhase.put("Carleton Room", 0);
 		createDeck(deck);
 	}

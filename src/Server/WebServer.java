@@ -45,8 +45,6 @@ public class WebServer {
 						PrintWriter out = new PrintWriter(remote.getOutputStream());
 						String  thisLine = null;
 						thisLine = in.readLine();
-					
-						System.out.println(thisLine);
 						if (thisLine.contains("GET /?join="))
 						{
 							System.out.println(thisLine);
@@ -90,8 +88,16 @@ public class WebServer {
 									&& model.roomsPhase.get(table)<2)
 							{
 								if (model.rooms.get(table)<6)
+								{
 									if (!model.hands.containsKey(user+","+table))
+									{
 										model.hands.put(user+","+table,model.serveCards(model.deck));
+										int roomSize = model.rooms.get(table);
+										roomSize++;
+										model.rooms.remove(table);
+										model.rooms.put(table,roomSize);
+									}
+								}
 								for (String userHands:model.hands.keySet())
 								{
 									if (userHands.contains(","+table))
@@ -126,8 +132,11 @@ public class WebServer {
 										else
 										{
 											String theHand = model.hands.get(userHands);
-											theHand.replace(",", " ");
-
+											String[] cards = theHand.split(",");
+											cards[1] = "X of X";
+											theHand = "";
+											for(String card : cards)
+												theHand = theHand + ", "+card;
 											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
 											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
 											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
@@ -141,14 +150,246 @@ public class WebServer {
 								}
 
 							}
+							else
+							{
+								for (String userHands:model.hands.keySet())
+								{
+									if (userHands.contains(","+table))
+									{
+										if (userHands.contains(user+","+table))
+										{
+											//The new user's hand
+											String theHand = model.hands.get(userHands);
+											theHand.replace(",", " ");
 
+											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
+											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
+											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
+											theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
+											theHand = theHand.replaceAll(",", "</tr><tr><td></td><td>");
+
+											String theUserName = userHands.replace(","+table,"");
+											out.println("<center><br><table><tr><td>"+theUserName+"</td> <td>" + theHand +"</td></tr></table></center>");
+
+											out.println("<center><table><tr><td>"
+													+ "<form>"
+													+  "<input type=\"hidden\" name=\"userHit\" value=\""+user+"\">"
+													+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+													+  "<input type=\"submit\" value=\"Hit\">"
+													+ "</form>");
+											out.println("</td><td><form>"
+													+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
+													+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+													+  "<input type=\"submit\" value=\"Stay\">"
+													+ "</form></td></tr></table></center>");
+										}
+										else
+										{
+											String theHand = model.hands.get(userHands);
+											String[] cards = theHand.split(",");
+											cards[1] = "X of X";
+											theHand = "";
+											for(String card : cards)
+												theHand = theHand + ", "+card;
+
+											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
+											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
+											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
+											theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
+											theHand = theHand.replaceAll(",", "</td></tr><tr><td></td><td>");
+											String theUserName = userHands.replace(","+table,"");
+											out.println("<center><br><table><tr><td>"+theUserName + "</td> <td>" + theHand + "</td></tr></table></center>");
+
+										}
+									}
+								}
+							}
 							out.println("</center></body></html>");
 							out.flush();
 							remote.close();
 							break;
 						}
+						else if (thisLine.contains("GET /?userHit="))
+						{
+							System.out.println(thisLine);
+							String user = thisLine;
+							String table = "";
+							user = user.replace("GET /?userHit=", "");
+							String[] tokens1 = user.split(" ");
+							String[] tokens = tokens1[0].split("\\&");
+							user = tokens[0];
+							table = tokens[1];
+							table = table.replace("table=", "");
+							table = table.replace("+", " ");
+							table.trim();
+							// Send the response
+							// Send the headers
 
-						else if (thisLine.contains("GET /?username=Dealer")||thisLine.contains("GET /?username=dealer"))
+							if (model.roomsPhase.get(table)==1)
+							{
+								model.roomsPhase.remove(table);
+								model.roomsPhase.put(table, 2);
+							}
+							String currentHand = model.hands.get(user+","+table);
+							currentHand = currentHand + "," + model.hit(model.deck);
+							model.hands.remove(user+","+table);
+							model.hands.put(user+","+table,currentHand);
+							out.println("HTTP/1.0 200 OK");
+							out.println("Content-Type: text/html");
+							out.println("Server: Bot");
+							// this blank line signals the end of the headers
+							out.println("");
+							// Send the HTML page
+							out.println("<html><head></head><body><H1>"+table+"</H1>");
+							out.println("<H2>Welcome "+user+"</H2>");
+							out.println("<br>");
+							for (String userHands:model.hands.keySet())
+							{
+								if (userHands.contains(","+table))
+								{
+									if (userHands.contains(user+","+table))
+									{
+										//The new user's hand
+										String theHand = model.hands.get(userHands);
+										theHand.replace(",", " ");
+
+										theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
+										theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
+										theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
+										theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
+										theHand = theHand.replaceAll(",", "</tr><tr><td></td><td>");
+
+										String theUserName = userHands.replace(","+table,"");
+										out.println("<center><br><table><tr><td>"+theUserName+"</td> <td>" + theHand +"</td></tr></table></center>");
+
+										out.println("<center><table><tr><td>"
+												+ "<form>"
+												+  "<input type=\"hidden\" name=\"userHit\" value=\""+user+"\">"
+												+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+												+  "<input type=\"submit\" value=\"Hit\">"
+												+ "</form>");
+										out.println("</td><td><form>"
+												+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
+												+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+												+  "<input type=\"submit\" value=\"Stay\">"
+												+ "</form></td></tr></table></center>");
+									}
+									else
+									{
+										String theHand = model.hands.get(userHands);
+										String[] cards = theHand.split(",");
+										cards[1] = "X of X";
+										theHand = "";
+										for(String card : cards)
+											theHand = theHand + ", "+card;
+
+										theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
+										theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
+										theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
+										theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
+										theHand = theHand.replaceAll(",", "</td></tr><tr><td></td><td>");
+										String theUserName = userHands.replace(","+table,"");
+										out.println("<center><br><table><tr><td>"+theUserName + "</td> <td>" + theHand + "</td></tr></table></center>");
+
+									}
+								}
+							}
+							out.println("</center></body></html>");
+							out.flush();
+							remote.close();
+							break;
+
+						}
+						else if (thisLine.contains("GET /?userStay="))
+						{
+							
+							System.out.println(thisLine);
+							String user = thisLine;
+							String table = "";
+							user = user.replace("GET /?userStay=", "");
+							String[] tokens1 = user.split(" ");
+							String[] tokens = tokens1[0].split("\\&");
+							user = tokens[0];
+							table = tokens[1];
+							table = table.replace("table=", "");
+							table = table.replace("+", " ");
+							table.trim();
+							// Send the response
+							// Send the headers
+							if (model.roomsPhase.get(table)==1)
+							{
+								model.roomsPhase.remove(table);
+								model.roomsPhase.put(table, 2);
+							}
+							if (!model.stays.get(table).contains(user))
+							{
+								String staying = model.stays.get(table);
+								if (staying.equals(""))
+									staying = user;
+								else
+									staying = staying + ", "+ user;
+								model.stays.remove(table);
+								model.stays.put(table,staying);
+							}
+							
+							out.println("HTTP/1.0 200 OK");
+							out.println("Content-Type: text/html");
+							out.println("Server: Bot");
+							// this blank line signals the end of the headers
+							out.println("");
+							// Send the HTML page
+							out.println("<html><head></head><body><H1>"+table+"</H1>");
+							out.println("<H2>Welcome "+user+"</H2>");
+							out.println("<br>");
+							for (String userHands:model.hands.keySet())
+							{
+								if (userHands.contains(","+table))
+								{
+									if (userHands.contains(user+","+table))
+									{
+										//The new user's hand
+										String theHand = model.hands.get(userHands);
+										theHand.replace(",", " ");
+
+										theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
+										theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
+										theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
+										theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
+										theHand = theHand.replaceAll(",", "</tr><tr><td></td><td>");
+
+										String theUserName = userHands.replace(","+table,"");
+										out.println("<center><br><table><tr><td>"+theUserName+"</td> <td>" + theHand +"</td></tr></table></center>");
+										
+										
+										out.println("<center><small>Waiting for others to finish playing</small></center>");
+									}
+									else
+									{
+										String theHand = model.hands.get(userHands);
+										String[] cards = theHand.split(",");
+										cards[1] = "X of X";
+										theHand = "";
+										for(String card : cards)
+											theHand = theHand + ", "+card;
+
+										theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
+										theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
+										theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
+										theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
+										theHand = theHand.replaceAll(",", "</td></tr><tr><td></td><td>");
+										String theUserName = userHands.replace(","+table,"");
+										out.println("<center><br><table><tr><td>"+theUserName + "</td> <td>" + theHand + "</td></tr></table></center>");
+
+									}
+								}
+							}
+							out.println("</center></body></html>");
+							out.flush();
+							remote.close();
+							break;
+
+						}
+						else if (thisLine.contains("GET /?username=Dealer")||thisLine.contains("GET /?username=dealer")||(thisLine.contains("GET /?username=")&&thisLine.contains("&")))
 						{
 							System.out.println(thisLine);
 							// Send the response
