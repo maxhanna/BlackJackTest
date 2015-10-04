@@ -2,7 +2,10 @@ package Server;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
+
+import javax.swing.Timer;
 
 public class BlackJackVariables {
 	public HashMap<String,Integer> rooms = new HashMap<String,Integer>();
@@ -10,6 +13,7 @@ public class BlackJackVariables {
 	public ArrayList<String> deck = new ArrayList<String>();
 	public HashMap<String,String> hands = new HashMap<String,String>();
 	public HashMap<String,String> stays = new HashMap<String,String>();
+	public HashMap<String,Date> roomRestartTimes = new HashMap<String,Date>();
 	
 	public int calculatePoints(String cards)
 	{
