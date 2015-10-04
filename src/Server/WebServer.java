@@ -1,13 +1,15 @@
 package Server;
 import Client.ClientVariables;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class WebServer {
-	String serverAddress = "localhost";
+	String serverAddress = "192.168.2.13:8000";
 	BlackJackVariables model = new BlackJackVariables();
 
 	protected void start() {
@@ -27,20 +29,23 @@ public class WebServer {
 		for (;;) {
 			try {
 				// wait for a connection
-				Socket remote = s.accept();
-				System.out.println("----------- REQUEST --------");
-				// remote is now the connected socket
-				BufferedReader in = new BufferedReader(new InputStreamReader(
-						remote.getInputStream()));
-				PrintWriter out = new PrintWriter(remote.getOutputStream());
+				
 
 				// read the data sent. 
 				// stop reading once a blank line is hit. This
 				// blank line signals the end of the client HTTP
 				// headers.
-				String  thisLine = null;
 				try{
-					while ((thisLine = in.readLine()) != null && !remote.isClosed()) {
+					while (true) {
+						Socket remote = s.accept();
+						System.out.println("----------- REQUEST --------");
+						//remote is now the connected socket
+						BufferedReader in = new BufferedReader(new InputStreamReader(
+								remote.getInputStream()));
+						PrintWriter out = new PrintWriter(remote.getOutputStream());
+						String  thisLine = null;
+						thisLine = in.readLine();
+					
 						System.out.println(thisLine);
 						if (thisLine.contains("GET /?join="))
 						{
@@ -64,11 +69,10 @@ public class WebServer {
 							out.println("");
 							// Send the HTML page
 							out.println("<html><head></head><body><H1>"+table+"</H1>");
-
 							out.println("<H2>Welcome "+user+"</H2>");
 							out.println("<br>");
-							
-								
+
+
 							if (model.rooms.get(table)>5)
 							{
 								out.println("<br>Room is currently full<br>");
@@ -78,6 +82,7 @@ public class WebServer {
 							{
 								model.roomsPhase.remove(table);
 								model.roomsPhase.put(table, 1);
+								model.shuffleDeck(model.deck);
 								model.hands.put("Dealer,"+table, model.serveCards(model.deck));
 								System.out.println("Initialize game table: "+table);
 							}
@@ -85,89 +90,64 @@ public class WebServer {
 									&& model.roomsPhase.get(table)<2)
 							{
 								if (model.rooms.get(table)<6)
-									model.hands.put(user+","+table,model.serveCards(model.deck));
+									if (!model.hands.containsKey(user+","+table))
+										model.hands.put(user+","+table,model.serveCards(model.deck));
 								for (String userHands:model.hands.keySet())
 								{
 									if (userHands.contains(","+table))
 									{
 										if (userHands.contains(user+","+table))
 										{
+											//The new user's hand
 											String theHand = model.hands.get(userHands);
 											theHand.replace(",", " ");
-											theHand = theHand.replace("Ace of spades", "<img src=cards/aceofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("King of spades", "<img src=cards/kingofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("Queen of spades", "<img src=cards/queenofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("Jack of spades", "<img src=cards/jackofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("10 of spades", "<img src=cards/10ofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("9 of spades", "<img src=cards/9ofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("8 of spades", "<img src=cards/8ofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("7 of spades", "<img src=cards/7ofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("6 of spades", "<img src=cards/6ofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("5 of spades", "<img src=cards/5ofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("4 of spades", "<img src=cards/4ofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("3 of spades", "<img src=cards/3ofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("2 of spades", "<img src=cards/2ofspades.jpg width=100 height=235>");
-											theHand = theHand.replace("Ace of hearts", "<img src=cards/aceofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("King of hearts", "<img src=cards/kingofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("Queen of hearts", "<img src=cards/queenofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("Jack of hearts", "<img src=cards/jackofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("10 of hearts", "<img src=cards/10ofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("9 of hearts", "<img src=cards/9ofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("8 of hearts", "<img src=cards/8ofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("7 of hearts", "<img src=cards/7ofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("6 of hearts", "<img src=cards/6ofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("5 of hearts", "<img src=cards/5ofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("4 of hearts", "<img src=cards/4ofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("3 of hearts", "<img src=cards/3ofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("2 of hearts", "<img src=cards/2ofhearts.jpg width=100 height=235>");
-											theHand = theHand.replace("Ace of clubs", "<img src=cards/aceofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("King of clubs", "<img src=cards/kingofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("Queen of clubs", "<img src=cards/queenofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("Jack of clubs", "<img src=cards/jackofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("10 of clubs", "<img src=cards/10ofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("9 of clubs", "<img src=cards/9ofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("8 of clubs", "<img src=cards/8ofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("7 of clubs", "<img src=cards/7ofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("6 of clubs", "<img src=cards/6ofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("5 of clubs", "<img src=cards/5ofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("4 of clubs", "<img src=cards/4ofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("3 of clubs", "<img src=cards/3ofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("2 of clubs", "<img src=cards/2ofclubs.jpg width=100 height=235>");
-											theHand = theHand.replace("Ace of diamonds", "<img src=cards/aceofdiamonds.jpg width=100 height=235>");
-											theHand = theHand.replace("King of diamonds", "<img src=cards/kingofdiamonds.jpg width=100 height=235>");
-											theHand = theHand.replace("Queen of diamonds", "<img src=cards/queenofdiamonds.jpg width=100 height=235>");
-											theHand = theHand.replace("Jack of diamonds", "<img src=cards/jackofdiamonds.jpg width=100 height=235>");
-											theHand = theHand.replace("10 of diamonds", "<img src=cards/10ofdiamonds.jpg width=100 height=235>");
-											theHand = theHand.replace("9 of diamonds", "<img src=cards/9ofdiamonds.jpg width=100 height=235>");
-											theHand = theHand.replace("8 of diamonds", "<img src=cards/8ofdiamonds.jpg width=100 height=235>");
-											theHand = theHand.replace("7 of diamonds", "<img src=cards/7ofdiamonds.jpg width=100 height=235>");
-											theHand = theHand.replace("6 of diamonds", "<img src=cards/6ofdiamonds.jpg width=100 height=235>");
-											theHand = theHand.replace("5 of diamonds", "<img src=cards/5ofdiamonds.jpg width=100 height=235>");
-											theHand = theHand.replace("4 of diamonds", "<img src=cards/4ofdiamonds.jpg width=100 height=235>");
-											theHand = theHand.replace("3 of diamonds", "<img src=cards/3ofdiamonds.jpg width=100 height=235>");
-											theHand = theHand.replace("2 of diamonds", "<img src=cards/2ofdiamonds.jpg width=100 height=235>");
-											
+
+											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
+											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
+											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
+											theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
+											theHand = theHand.replaceAll(",", "</tr><tr><td></td><td>");
+
 											String theUserName = userHands.replace(","+table,"");
-											out.println("<br>"+theUserName+" " + model.hands.get(userHands));
-										
+											out.println("<center><br><table><tr><td>"+theUserName+"</td> <td>" + theHand +"</td></tr></table></center>");
+
+											out.println("<center><table><tr><td>"
+													+ "<form>"
+													+  "<input type=\"hidden\" name=\"userHit\" value=\""+user+"\">"
+													+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+													+  "<input type=\"submit\" value=\"Hit\">"
+													+ "</form>");
+											out.println("</td><td><form>"
+													+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
+													+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+													+  "<input type=\"submit\" value=\"Stay\">"
+													+ "</form></td></tr></table></center>");
 										}
 										else
 										{
 											String theHand = model.hands.get(userHands);
+											theHand.replace(",", " ");
+
+											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
+											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
+											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
+											theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
+											theHand = theHand.replaceAll(",", "</td></tr><tr><td></td><td>");
 											String theUserName = userHands.replace(","+table,"");
-											out.println("<br>"+theUserName+" " + theHand);
-										
+											out.println("<center><br><table><tr><td>"+theUserName + "</td> <td>" + theHand + "</td></tr></table></center>");
+
 										}
 									}
 								}
-								
+
 							}
 
 							out.println("</center></body></html>");
 							out.flush();
-							//	remote.close();
+							remote.close();
 							break;
 						}
+
 						else if (thisLine.contains("GET /?username=Dealer")||thisLine.contains("GET /?username=dealer"))
 						{
 							System.out.println(thisLine);
@@ -185,7 +165,7 @@ public class WebServer {
 									+ " id=\"username\" name=\"username\"><br>"
 									+ "<input type=\"submit\" value=\"Submit\"></form></body></html>");
 							out.flush();
-							//remote.close();
+							remote.close();
 							break;
 						}
 						else if (thisLine.contains("GET /?username="))
@@ -205,24 +185,24 @@ public class WebServer {
 							out.println("");
 							// Send the HTML page
 							out.println("<html><head></head><body><H1>Lobby</H1>");
-							
+
 							out.println("<H2>Welcome "+user+"</H2>");
 							for (String room : model.rooms.keySet())
 							{
 								out.println("<center>"+room
-									+ "<br>"+model.rooms.get(room)
-									+ "/6 Currently playing"
-									+ "<form>"
-									+  "<input type=\"hidden\" name=\"join\" value=\""+user+"\">"
-									+  "<input type=\"hidden\" name=\"table\" value=\""+room+"\">"
-									+  "<input type=\"submit\" value=\"Join\">"
-									+ "</form>");
+										+ "<br>"+model.rooms.get(room)
+										+ "/6 Currently playing"
+										+ "<form>"
+										+  "<input type=\"hidden\" name=\"join\" value=\""+user+"\">"
+										+  "<input type=\"hidden\" name=\"table\" value=\""+room+"\">"
+										+  "<input type=\"submit\" value=\"Join\">"
+										+ "</form>");
 							}
 							out.println("</center></body></html>");
-								
+
 
 							out.flush();
-							//	remote.close();
+								remote.close();
 							break;
 						}
 						else if (thisLine.contains("GET / HTTP"))
@@ -242,7 +222,7 @@ public class WebServer {
 									+ " id=\"username\" name=\"username\"><br>"
 									+ "<input type=\"submit\" value=\"Submit\"></form></body></html>");
 							out.flush();
-							//remote.close();
+							remote.close();
 							break;
 						}
 					}       
