@@ -29,7 +29,7 @@ public class WebServer {
 		for (;;) {
 			try {
 				// wait for a connection
-				
+
 
 				// read the data sent. 
 				// stop reading once a blank line is hit. This
@@ -66,7 +66,26 @@ public class WebServer {
 							// this blank line signals the end of the headers
 							out.println("");
 							// Send the HTML page
-							out.println("<html><head></head><body><H1>"+table+"</H1>");
+							out.println("<html><head>"
+									+ "<script type=\"text/javascript\">"
+									+ "function makeMeGlow()"
+									+ "{  var myButton =document.getElementById('theButton');"
+									+ "myButton.style.background = \"black\";"
+									+ "myButton.style.color = \"white\";"
+									+ "myButton.value = \"Stay\"; "
+									+ "setTimeout('nowImGlowing()', 2000);"
+									+ "}"
+
+									+ "function nowImGlowing()"
+									+"{  var myButton1 =document.getElementById('theButton');"
+
+									+"myButton1.style.background = \"gold\";"
+									+"myButton1.style.color = \"black\";"
+									+ "myButton1.value = \"Stay\"; "
+									+ "setTimeout('makeMeGlow()', 2000);"
+									+ "}"
+									+ "</script>"
+									+ "</head><body onLoad=\"makeMeGlow()\"><H1>"+table+"</H1>");
 							out.println("<H2>Welcome "+user+"</H2>");
 							out.println("<br>");
 
@@ -106,6 +125,7 @@ public class WebServer {
 										{
 											//The new user's hand
 											String theHand = model.hands.get(userHands);
+											String unEditedHand = theHand;
 											theHand.replace(",", " ");
 
 											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
@@ -115,19 +135,34 @@ public class WebServer {
 											theHand = theHand.replaceAll(",", "</tr><tr><td></td><td>");
 
 											String theUserName = userHands.replace(","+table,"");
-											out.println("<center><br><table><tr><td>"+theUserName+"</td> <td>" + theHand +"</td></tr></table></center>");
+											int score = model.calculatePoints(unEditedHand);
+											out.println("<center><br><table><tr><td><h1>"+theUserName+"("+score+" points)</h1></td> <td>" + theHand +"</td></tr></table></center>");
+											if (score < 21)
+											{
+												out.println("<center><table><tr><td>"
+														+ "<form>"
+														+  "<input type=\"hidden\" name=\"userHit\" value=\""+user+"\">"
+														+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+														+  "<input type=\"submit\" value=\"Hit\">"
+														+ "</form>");
+											}
+											if (score > 20)
+											{
+												out.println("</td><td><center><form>"
+														+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
+														+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+														+  "<input id=\"theButton\" value=\"GLOW\" type=\"submit\">"
+														+ "</form></td></tr></table></center>");
+											}
+											else
+											{
+												out.println("</td><td><form>"
+														+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
+														+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+														+  "<input type=\"submit\" value=\"Stay\">"
+														+ "</form></td></tr></table></center>");
 
-											out.println("<center><table><tr><td>"
-													+ "<form>"
-													+  "<input type=\"hidden\" name=\"userHit\" value=\""+user+"\">"
-													+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-													+  "<input type=\"submit\" value=\"Hit\">"
-													+ "</form>");
-											out.println("</td><td><form>"
-													+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
-													+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-													+  "<input type=\"submit\" value=\"Stay\">"
-													+ "</form></td></tr></table></center>");
+											}
 										}
 										else
 										{
@@ -137,14 +172,19 @@ public class WebServer {
 											theHand = "";
 											for(String card : cards)
 												theHand = theHand + ", "+card;
+
+											String unEditedHand = theHand;
 											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
 											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
 											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
 											theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
 											theHand = theHand.replaceAll(",", "</td></tr><tr><td></td><td>");
 											String theUserName = userHands.replace(","+table,"");
-											out.println("<center><br><table><tr><td>"+theUserName + "</td> <td>" + theHand + "</td></tr></table></center>");
-
+											out.println("<center><br><table><tr><td><h2>"+theUserName + "("+model.calculatePoints(unEditedHand)+" points)</h2></td> <td>" + theHand + "</td></tr></table></center>");
+											if (model.stays.get(table).contains(theUserName))
+											{
+												out.println("<center>"+theUserName + " stays</center>");	
+											}
 										}
 									}
 								}
@@ -160,6 +200,7 @@ public class WebServer {
 										{
 											//The new user's hand
 											String theHand = model.hands.get(userHands);
+											String unEditedHand = theHand;
 											theHand.replace(",", " ");
 
 											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
@@ -169,7 +210,7 @@ public class WebServer {
 											theHand = theHand.replaceAll(",", "</tr><tr><td></td><td>");
 
 											String theUserName = userHands.replace(","+table,"");
-											out.println("<center><br><table><tr><td>"+theUserName+"</td> <td>" + theHand +"</td></tr></table></center>");
+											out.println("<center><br><table><tr><td><h1>"+theUserName+"("+model.calculatePoints(unEditedHand)+" points)</h1></td> <td>" + theHand +"</td></tr></table></center>");
 
 											out.println("<center><table><tr><td>"
 													+ "<form>"
@@ -186,20 +227,25 @@ public class WebServer {
 										else
 										{
 											String theHand = model.hands.get(userHands);
+
 											String[] cards = theHand.split(",");
 											cards[1] = "X of X";
 											theHand = "";
 											for(String card : cards)
 												theHand = theHand + ", "+card;
 
+											String unEditedHand = theHand;
 											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
 											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
 											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
 											theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
 											theHand = theHand.replaceAll(",", "</td></tr><tr><td></td><td>");
 											String theUserName = userHands.replace(","+table,"");
-											out.println("<center><br><table><tr><td>"+theUserName + "</td> <td>" + theHand + "</td></tr></table></center>");
-
+											out.println("<center><br><table><tr><td><h2>"+theUserName + "("+model.calculatePoints(unEditedHand)+" points)</h2></td> <td>" + theHand + "</td></tr></table></center>");
+											if (model.stays.get(table).contains(theUserName))
+											{
+												out.println("<center>"+theUserName + " stays</center>");	
+											}
 										}
 									}
 								}
@@ -240,7 +286,26 @@ public class WebServer {
 							// this blank line signals the end of the headers
 							out.println("");
 							// Send the HTML page
-							out.println("<html><head></head><body><H1>"+table+"</H1>");
+							out.println("<html><head>"
+									+ "<script type=\"text/javascript\">"
+									+ "function makeMeGlow()"
+									+ "{  var myButton =document.getElementById('theButton');"
+									+ "myButton.style.background = \"black\";"
+									+ "myButton.style.color = \"white\";"
+									+ "myButton.value = \"Stay\"; "
+									+ "setTimeout('nowImGlowing()', 2000);"
+									+ "}"
+
+									+ "function nowImGlowing()"
+									+"{  var myButton1 =document.getElementById('theButton');"
+
+									+"myButton1.style.background = \"gold\";"
+									+"myButton1.style.color = \"black\";"
+									+ "myButton1.value = \"Stay\"; "
+									+ "setTimeout('makeMeGlow()', 2000);"
+									+ "}"
+									+ "</script>"
+									+ "</head><body onLoad=\"makeMeGlow()\"><H1>"+table+"</H1>");
 							out.println("<H2>Welcome "+user+"</H2>");
 							out.println("<br>");
 							for (String userHands:model.hands.keySet())
@@ -251,6 +316,8 @@ public class WebServer {
 									{
 										//The new user's hand
 										String theHand = model.hands.get(userHands);
+
+										String unEditedHand = theHand;
 										theHand.replace(",", " ");
 
 										theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
@@ -260,19 +327,33 @@ public class WebServer {
 										theHand = theHand.replaceAll(",", "</tr><tr><td></td><td>");
 
 										String theUserName = userHands.replace(","+table,"");
-										out.println("<center><br><table><tr><td>"+theUserName+"</td> <td>" + theHand +"</td></tr></table></center>");
-
-										out.println("<center><table><tr><td>"
-												+ "<form>"
-												+  "<input type=\"hidden\" name=\"userHit\" value=\""+user+"\">"
-												+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-												+  "<input type=\"submit\" value=\"Hit\">"
-												+ "</form>");
-										out.println("</td><td><form>"
-												+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
-												+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-												+  "<input type=\"submit\" value=\"Stay\">"
-												+ "</form></td></tr></table></center>");
+										int score = model.calculatePoints(unEditedHand);
+										out.println("<center><br><table><tr><td><h1>"+theUserName+"("+score+" points)</h1></td> <td>" + theHand +"</td></tr></table></center>");
+										if (score < 21)
+										{
+											out.println("<center><table><tr><td>"
+													+ "<form>"
+													+  "<input type=\"hidden\" name=\"userHit\" value=\""+user+"\">"
+													+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+													+  "<input type=\"submit\" value=\"Hit\">"
+													+ "</form>");
+										}
+										if (score > 20)
+										{
+											out.println("</td><td><center><form>"
+													+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
+													+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+													+  "<input type=\"submit\" id=\"theButton\" value=\"GLOW\">"
+													+ "</form></td></tr></table></center>");
+										}
+										else
+										{
+											out.println("</td><td><form>"
+													+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
+													+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+													+  "<input type=\"submit\" value=\"Stay\">"
+													+ "</form></td></tr></table></center>");
+										}
 									}
 									else
 									{
@@ -282,6 +363,7 @@ public class WebServer {
 										theHand = "";
 										for(String card : cards)
 											theHand = theHand + ", "+card;
+										String unEditedHand = theHand;
 
 										theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
 										theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
@@ -289,8 +371,11 @@ public class WebServer {
 										theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
 										theHand = theHand.replaceAll(",", "</td></tr><tr><td></td><td>");
 										String theUserName = userHands.replace(","+table,"");
-										out.println("<center><br><table><tr><td>"+theUserName + "</td> <td>" + theHand + "</td></tr></table></center>");
-
+										out.println("<center><br><table><tr><td><h2>"+theUserName + "("+model.calculatePoints(unEditedHand)+" points)</h2></td> <td>" + theHand + "</td></tr></table></center>");
+										if (model.stays.get(table).contains(theUserName))
+										{
+											out.println("<center>"+theUserName + " stays</center>");	
+										}
 									}
 								}
 							}
@@ -302,7 +387,7 @@ public class WebServer {
 						}
 						else if (thisLine.contains("GET /?userStay="))
 						{
-							
+
 							System.out.println(thisLine);
 							String user = thisLine;
 							String table = "";
@@ -331,55 +416,122 @@ public class WebServer {
 								model.stays.remove(table);
 								model.stays.put(table,staying);
 							}
-							
-							out.println("HTTP/1.0 200 OK");
-							out.println("Content-Type: text/html");
-							out.println("Server: Bot");
-							// this blank line signals the end of the headers
-							out.println("");
-							// Send the HTML page
-							out.println("<html><head></head><body><H1>"+table+"</H1>");
-							out.println("<H2>Welcome "+user+"</H2>");
-							out.println("<br>");
-							for (String userHands:model.hands.keySet())
+							// check if all users have stayed
+							// if so, display results page, if not, display game page.
+
+							int count = model.stays.get(table).length() - model.stays.get(table).replace(",", "").length();
+							if (count == model.rooms.get(table)-1)
 							{
-								if (userHands.contains(","+table))
+								// every user has played
+
+								out.println("HTTP/1.0 200 OK");
+								out.println("Content-Type: text/html");
+								out.println("Server: Bot");
+								// this blank line signals the end of the headers
+								out.println("");
+								// Send the HTML page
+								out.println("<html><head></head><body><H1>"+table+"</H1>");
+								out.println("<H2>Welcome "+user+", now displaying results</H2>");
+								out.println("<br>");
+								for (String userHands:model.hands.keySet())
 								{
-									if (userHands.contains(user+","+table))
+									if (userHands.contains(","+table))
 									{
-										//The new user's hand
-										String theHand = model.hands.get(userHands);
-										theHand.replace(",", " ");
+										if (userHands.contains(user+","+table))
+										{
+											//The new user's hand
+											String theHand = model.hands.get(userHands);
+											String unEditedHand = theHand;
+											theHand.replace(",", " ");
 
-										theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
-										theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
-										theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
-										theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
-										theHand = theHand.replaceAll(",", "</tr><tr><td></td><td>");
+											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
+											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
+											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
+											theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
+											theHand = theHand.replaceAll(",", "</tr><tr><td></td><td>");
 
-										String theUserName = userHands.replace(","+table,"");
-										out.println("<center><br><table><tr><td>"+theUserName+"</td> <td>" + theHand +"</td></tr></table></center>");
-										
-										
-										out.println("<center><small>Waiting for others to finish playing</small></center>");
+											String theUserName = userHands.replace(","+table,"");
+											out.println("<center><br><table><tr><td><h1>"+theUserName+"("+model.calculatePoints(unEditedHand)+" points)<h1> </td> <td>" + theHand +"</td></tr></table></center>");
+
+
+
+										}
+										else
+										{
+											String theHand = model.hands.get(userHands);
+											String unEditedHand = theHand;
+
+											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
+											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
+											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
+											theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
+											theHand = theHand.replaceAll(",", "</td></tr><tr><td></td><td>");
+											String theUserName = userHands.replace(","+table,"");
+											out.println("<center><br><table><tr><td><h2>"+theUserName + "("+model.calculatePoints(unEditedHand)+" points)</h2></td> <td>" + theHand + "</td></tr></table></center>");
+
+
+										}
 									}
-									else
+								}
+
+							}
+							else
+							{
+								out.println("HTTP/1.0 200 OK");
+								out.println("Content-Type: text/html");
+								out.println("Server: Bot");
+								// this blank line signals the end of the headers
+								out.println("");
+								// Send the HTML page
+								out.println("<html><head></head><body><H1>"+table+"</H1>");
+								out.println("<H2>Welcome "+user+"</H2>");
+								out.println("<br>");
+								for (String userHands:model.hands.keySet())
+								{
+									if (userHands.contains(","+table))
 									{
-										String theHand = model.hands.get(userHands);
-										String[] cards = theHand.split(",");
-										cards[1] = "X of X";
-										theHand = "";
-										for(String card : cards)
-											theHand = theHand + ", "+card;
+										if (userHands.contains(user+","+table))
+										{
+											//The new user's hand
+											String theHand = model.hands.get(userHands);
 
-										theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
-										theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
-										theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
-										theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
-										theHand = theHand.replaceAll(",", "</td></tr><tr><td></td><td>");
-										String theUserName = userHands.replace(","+table,"");
-										out.println("<center><br><table><tr><td>"+theUserName + "</td> <td>" + theHand + "</td></tr></table></center>");
+											String unEditedHand = theHand;
+											theHand.replace(",", " ");
 
+											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
+											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
+											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
+											theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
+											theHand = theHand.replaceAll(",", "</tr><tr><td></td><td>");
+
+											String theUserName = userHands.replace(","+table,"");
+											out.println("<center><br><table><tr><td><h1>"+theUserName+"("+model.calculatePoints(unEditedHand)+" points)</h1></td> <td>" + theHand +"</td></tr></table></center>");
+
+
+											out.println("<center><small>Waiting for others to finish playing</small></center>");
+										}
+										else
+										{
+											String theHand = model.hands.get(userHands);
+											String[] cards = theHand.split(",");
+											cards[1] = "X of X";
+											theHand = "";
+											for(String card : cards)
+												theHand = theHand + ", "+card;
+											String unEditedHand = theHand;
+
+											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
+											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
+											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
+											theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
+											theHand = theHand.replaceAll(",", "</td></tr><tr><td></td><td>");
+											String theUserName = userHands.replace(","+table,"");
+											out.println("<center><br><table><tr><td><h2>"+theUserName + "("+model.calculatePoints(unEditedHand)+" points)</h2></td> <td>" + theHand + "</td></tr></table></center>");
+											if (model.stays.get(table).contains(theUserName))
+											{
+												out.println("<center>"+theUserName + " stays</center>");	
+											}
+										}
 									}
 								}
 							}
@@ -443,7 +595,7 @@ public class WebServer {
 
 
 							out.flush();
-								remote.close();
+							remote.close();
 							break;
 						}
 						else if (thisLine.contains("GET / HTTP"))
