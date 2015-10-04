@@ -4,4 +4,6 @@ Black Jack TDD style.
 Launch Web Server by compiling and running WebServer.java
 
 #To begin playing, go to your browser and type in the address bar:
-http://<your-ip-address>:8000
+http://your-ip-address:8000
+
+example: http://192.168.1.1:8000
