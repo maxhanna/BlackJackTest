@@ -119,7 +119,7 @@ public class WebServer {
 									+ "</head><body onLoad=\"makeMeGlow()\"><H1>"+table+"</H1>");
 							out.println("<H2>Welcome "+user+"</H2>");
 							out.println("<br>");
-							if (model.stays.get(table).contains("Dealer"))
+							if (model.stays.get(table)!=null && model.stays.get(table).contains("Dealer"))
 							{		
 								currDate = new Date();
 
@@ -139,12 +139,22 @@ public class WebServer {
 									String[] competitionArray = competitors.split(",");
 									for(String competitor: competitionArray)
 									{
-										if (model.calculatePoints(model.hands.get(competitor+","+table)) > dealerScore && model.calculatePoints(model.hands.get(competitor+","+table)) < 22)
+										competitor = competitor.trim();
+										System.out.println("Points for " + competitor + ": "+model.calculatePoints(model.hands.get(competitor+","+table)));
+										if (model.hands.containsKey(competitor) && model.hands.containsKey(competitor+","+table))
 										{
-											if (victors.equals(""))
-												victors = competitor;
-											else
-												victors = victors + ", " + competitor;
+											if (model.calculatePoints(model.hands.get(competitor+","+table)) > dealerScore && model.calculatePoints(model.hands.get(competitor+","+table)) < 22)
+											{
+												if (victors.equals(""))
+													victors = competitor;
+												else
+													victors = victors + ", " + competitor;
+											}
+										}
+										else
+										{
+											out.println("<br> Table does not contain your current hand");
+											
 										}
 									}
 									if (victors.equals(""))
@@ -206,12 +216,15 @@ public class WebServer {
 												out.println("<center>"+theUserName + " stays</center>");	
 											}
 										}
+										
 									}
+									
 								}
+								
 							}
 							else
 							{
-								if (model.rooms.get(table)>5)
+								if (model.rooms.containsKey(table) && model.rooms.get(table)>5 && !model.hands.containsKey(user+","+table))
 								{
 									out.println("<br>Room is currently full<br>");
 								}
@@ -258,31 +271,34 @@ public class WebServer {
 												String theUserName = userHands.replace(","+table,"");
 												int score = model.calculatePoints(unEditedHand);
 												out.println("<center><br><table><tr><td><h1>"+theUserName+"("+score+" points)</h1></td> <td>" + theHand +"</td></tr></table></center>");
-												if (score < 21)
+												if (!model.stays.get(table).contains(theUserName))
 												{
+													if (score < 21)
+													{
 													out.println("<center><table><tr><td>"
 															+ "<form>"
 															+  "<input type=\"hidden\" name=\"userHit\" value=\""+user+"\">"
 															+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
 															+  "<input type=\"submit\" value=\"Hit\">"
 															+ "</form>");
-												}
-												if (score > 20)
-												{
+													}
+													if (score > 20)
+													{
 													out.println("</td><td><center><form>"
 															+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
 															+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
 															+  "<input id=\"theButton\" value=\"GLOW\" type=\"submit\">"
 															+ "</form></td></tr></table></center>");
-												}
-												else
-												{
+													}
+													else
+													{
 													out.println("</td><td><form>"
 															+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
 															+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
 															+  "<input type=\"submit\" value=\"Stay\">"
 															+ "</form></td></tr></table></center>");
 
+													}
 												}
 											}
 											else
@@ -313,6 +329,7 @@ public class WebServer {
 								}
 								else
 								{
+									
 									for (String userHands:model.hands.keySet())
 									{
 										if (userHands.contains(","+table))
@@ -332,18 +349,21 @@ public class WebServer {
 
 												String theUserName = userHands.replace(","+table,"");
 												out.println("<center><br><table><tr><td><h1>"+theUserName+"("+model.calculatePoints(unEditedHand)+" points)</h1></td> <td>" + theHand +"</td></tr></table></center>");
-
-												out.println("<center><table><tr><td>"
-														+ "<form>"
-														+  "<input type=\"hidden\" name=\"userHit\" value=\""+user+"\">"
-														+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-														+  "<input type=\"submit\" value=\"Hit\">"
-														+ "</form>");
-												out.println("</td><td><form>"
-														+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
-														+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-														+  "<input type=\"submit\" value=\"Stay\">"
-														+ "</form></td></tr></table></center>");
+												if (!model.stays.get(table).contains(theUserName))
+												{
+													out.println("<center><table><tr><td>"
+															+ "<form>"
+															+  "<input type=\"hidden\" name=\"userHit\" value=\""+user+"\">"
+															+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+															+  "<input type=\"submit\" value=\"Hit\">"
+															+ "</form>");
+													out.println("</td><td><form>"
+															+  "<input type=\"hidden\" name=\"userStay\" value=\""+user+"\">"
+															+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
+															+  "<input type=\"submit\" value=\"Stay\">"
+															+ "</form></td></tr></table></center>");
+											
+												}
 											}
 											else
 											{
@@ -371,7 +391,9 @@ public class WebServer {
 										}
 									}
 								}
+								
 							}
+							
 							out.println("</center></body></html>");
 							out.flush();
 							remote.close();
@@ -594,6 +616,8 @@ public class WebServer {
 											String[] competitionArray = competitors.split(",");
 											for(String competitor: competitionArray)
 											{
+												competitor = competitor.trim();
+												System.out.println("Points for " + competitor + ": "+model.calculatePoints(model.hands.get(competitor+","+table)));
 												if (model.calculatePoints(model.hands.get(competitor+","+table)) > dealerScore && model.calculatePoints(model.hands.get(competitor+","+table)) < 22)
 												{
 													if (victors.equals(""))
@@ -642,14 +666,25 @@ public class WebServer {
 										String[] competitionArray = competitors.split(",");
 										for(String competitor: competitionArray)
 										{
-											if (model.calculatePoints(model.hands.get(competitor+","+table)) > dealerScore && model.calculatePoints(model.hands.get(competitor+","+table)) < 22)
+											competitor = competitor.trim();
+											System.out.println("Trying to get points for : "+competitor);
+											System.out.println("Points for " + competitor + ": "+model.calculatePoints(model.hands.get(competitor+","+table)));
+											if (model.hands.containsKey(competitor) && model.hands.containsKey(competitor+","+table))
 											{
-												if (victors.equals(""))
-													victors = competitor;
-												else
-													victors = victors + ", " + competitor;
+												if (model.calculatePoints(model.hands.get(competitor+","+table)) > dealerScore && model.calculatePoints(model.hands.get(competitor+","+table)) < 22)
+												{
+													if (victors.equals(""))
+														victors = competitor;
+													else
+														victors = victors + ", " + competitor;
+												}
 											}
-										}
+											else
+											{
+												out.println("<br> Table does not contain your current hand");
+												
+											}
+										}	
 										if (victors.equals(""))
 										{
 											out.println("<br> Dealer won");
@@ -713,11 +748,15 @@ public class WebServer {
 									// this blank line signals the end of the headers
 									out.println("");
 									// Send the HTML page
-									out.println("<html><head></head><body><H1>"+table+"</H1>");
+									String tmpTable = table;
+									tmpTable = tmpTable.replaceAll(" ", "+");
+									out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?join="+user+"&table="+tmpTable+"\" /></head><body><H1>"+table+"</H1>");
 									out.println("<H2>Welcome "+user+"</H2>");
 									out.println("<br>");
+
 									if (model.stays.get(table).contains("Dealer"))
 									{		
+										
 										currDate = new Date();
 
 										long diff = currDate.getTime() - model.roomRestartTimes.get(table).getTime();
@@ -736,12 +775,22 @@ public class WebServer {
 											String[] competitionArray = competitors.split(",");
 											for(String competitor: competitionArray)
 											{
-												if (model.calculatePoints(model.hands.get(competitor+","+table)) > dealerScore && model.calculatePoints(model.hands.get(competitor+","+table)) < 22)
+												competitor = competitor.trim();
+												System.out.println("Points for " + competitor + ": "+model.calculatePoints(model.hands.get(competitor+","+table)));
+												if (model.hands.containsKey(competitor) && model.hands.containsKey(competitor+","+table))
 												{
-													if (victors.equals(""))
-														victors = competitor;
-													else
-														victors = victors + ", " + competitor;
+													if (model.calculatePoints(model.hands.get(competitor+","+table)) > dealerScore && model.calculatePoints(model.hands.get(competitor+","+table)) < 22)
+													{
+														if (victors.equals(""))
+															victors = competitor;
+														else
+															victors = victors + ", " + competitor;
+													}
+												}
+												else
+												{
+													out.println("<br> Table does not contain your current hand");
+													
 												}
 											}
 											if (victors.equals(""))
@@ -806,10 +855,15 @@ public class WebServer {
 											}
 										}
 									}
+										
+									
 								}
 
 
 							}
+							if (model.roomsPhase.get(table) == 0)
+								out.println("<html><head><body><center><br><a href=\"/?join="+user+"&table="+table+"\">Click here to play again!</a>");
+							
 							out.println("</center></body></html>");
 							out.flush();
 							remote.close();
