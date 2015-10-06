@@ -54,10 +54,10 @@ public class WebServer {
 								model.stays.remove(table);
 								model.stays.put(table, "");
 
-								Iterator it = model.hands.entrySet().iterator();
+								Iterator<Entry<String, String>> it = model.hands.entrySet().iterator();
 								while(it.hasNext())
 								{
-									Entry userName = (Entry) it.next();
+									Entry<String, String> userName = (Entry<String, String>) it.next();
 									if (userName.toString().contains(table))
 									{
 										System.out.println("Removing : "+userName);
@@ -87,7 +87,12 @@ public class WebServer {
 							user = tokens[0];
 							table = tokens[1];
 							table = table.replace("table=", "");
-							table = table.replace("+", " ");
+							user = user.replaceAll("\\+", " ");
+							user = user.replaceAll("%20", " ");
+							user = user.replaceAll("%2B", " ");
+							table = table.replaceAll("\\+", " ");
+							table = table.replaceAll("%20", " ");
+							table = table.replaceAll("%2B", " ");
 							table.trim();
 							// Send the response
 							// Send the headers
@@ -97,7 +102,7 @@ public class WebServer {
 							// this blank line signals the end of the headers
 							out.println("");
 							// Send the HTML page
-							out.println("<html><head>"
+							out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?join="+user+"&table="+table+"\" />"
 									+ "<script type=\"text/javascript\">"
 									+ "function makeMeGlow()"
 									+ "{  var myButton =document.getElementById('theButton');"
@@ -141,8 +146,7 @@ public class WebServer {
 									{
 										competitor = competitor.trim();
 										System.out.println("Points for " + competitor + ": "+model.calculatePoints(model.hands.get(competitor+","+table)));
-										if (model.hands.containsKey(competitor) && model.hands.containsKey(competitor+","+table))
-										{
+										
 											if (model.calculatePoints(model.hands.get(competitor+","+table)) > dealerScore && model.calculatePoints(model.hands.get(competitor+","+table)) < 22)
 											{
 												if (victors.equals(""))
@@ -150,21 +154,16 @@ public class WebServer {
 												else
 													victors = victors + ", " + competitor;
 											}
-										}
-										else
-										{
-											out.println("<br> Table does not contain your current hand");
-											
-										}
+										
 									}
 									if (victors.equals(""))
 									{
-										out.println("<br> Dealer won");
+										out.println("<br><center><h1> Dealer won</h1></center>");
 
 									}
 									else 
 									{
-										out.println("<br>"+victors+" won");
+										out.println("<br><center><h1>"+victors+" won</h1></center>");
 
 									}
 								}
@@ -409,8 +408,13 @@ public class WebServer {
 							String[] tokens = tokens1[0].split("\\&");
 							user = tokens[0];
 							table = tokens[1];
-							table = table.replace("table=", "");
-							table = table.replace("+", " ");
+							user = user.replaceAll("%20", " ");
+							user = user.replaceAll("\\+", " ");
+							user = user.replaceAll("%2B", " ");
+							table = table.replaceAll("table=", "");
+							table = table.replaceAll("\\+", " ");
+							table = table.replaceAll("%20", " ");
+							table = table.replaceAll("%2B", " ");
 							table.trim();
 							// Send the response
 							// Send the headers
@@ -430,7 +434,7 @@ public class WebServer {
 							// this blank line signals the end of the headers
 							out.println("");
 							// Send the HTML page
-							out.println("<html><head>"
+							out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?join="+user+"&table="+table+"\" />"
 									+ "<script type=\"text/javascript\">"
 									+ "function makeMeGlow()"
 									+ "{  var myButton =document.getElementById('theButton');"
@@ -540,8 +544,13 @@ public class WebServer {
 							String[] tokens = tokens1[0].split("\\&");
 							user = tokens[0];
 							table = tokens[1];
-							table = table.replace("table=", "");
-							table = table.replace("+", " ");
+							table = table.replaceAll("table=", "");
+							table = table.replaceAll("\\+", " ");
+							table = table.replaceAll("%20", " ");
+							table = table.replaceAll("%2B", " ");
+							user = user.replaceAll("\\+", " ");
+							user = user.replaceAll("%20", " ");
+							user = user.replaceAll("%2B", " ");
 							table.trim();
 							// Send the response
 							// Send the headers
@@ -549,9 +558,12 @@ public class WebServer {
 							out.println("HTTP/1.0 200 OK");
 							out.println("Content-Type: text/html");
 							out.println("Server: Bot");
-							out.println("<html><head></head><body>");
-
-							if (model.roomsPhase.get(table)==1)
+							out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?userStay="+user+"&table="+table+"\" /></head><body>");
+							if (model.roomsPhase.get(table)==null)
+							{
+								model.roomsPhase.put(table, 0);
+							}
+							if (model.roomsPhase.get(table)!=null && model.roomsPhase.get(table)==1)
 							{
 								model.roomsPhase.remove(table);
 								model.roomsPhase.put(table, 2);
@@ -581,9 +593,13 @@ public class WebServer {
 								{
 									// every user has played
 									// Set the dealers hand, if dealer has not played.
+									// Send the response
+									// Send the headers
 
 									// this blank line signals the end of the headers
 									out.println("");
+									out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?userStay="+user+"&table="+table+"\" /></head><body>");
+
 									// Send the HTML page
 									out.println("<H1>"+table+"</H1>");
 									out.println("<H2>Welcome "+user+", now displaying results</H2>");
@@ -628,12 +644,12 @@ public class WebServer {
 											}
 											if (victors.equals(""))
 											{
-												out.println("<br> Dealer won");
+												out.println("<br><center><h1> Dealer won</h1></center>");
 
 											}
 											else 
 											{
-												out.println("<br>"+victors+" won");
+												out.println("<br><center><h1> "+victors+" won</h1></center>");
 
 											}
 
@@ -669,8 +685,7 @@ public class WebServer {
 											competitor = competitor.trim();
 											System.out.println("Trying to get points for : "+competitor);
 											System.out.println("Points for " + competitor + ": "+model.calculatePoints(model.hands.get(competitor+","+table)));
-											if (model.hands.containsKey(competitor) && model.hands.containsKey(competitor+","+table))
-											{
+											
 												if (model.calculatePoints(model.hands.get(competitor+","+table)) > dealerScore && model.calculatePoints(model.hands.get(competitor+","+table)) < 22)
 												{
 													if (victors.equals(""))
@@ -678,21 +693,16 @@ public class WebServer {
 													else
 														victors = victors + ", " + competitor;
 												}
-											}
-											else
-											{
-												out.println("<br> Table does not contain your current hand");
-												
-											}
+											
 										}	
 										if (victors.equals(""))
 										{
-											out.println("<br> Dealer won");
+											out.println("<br><center><h1> Dealer won</h1></center>");
 
 										}
 										else 
 										{
-											out.println("<br>"+victors+" won");
+											out.println("<br><center><h1>"+victors+" won</h1></center>");
 
 										}
 									}
@@ -777,8 +787,7 @@ public class WebServer {
 											{
 												competitor = competitor.trim();
 												System.out.println("Points for " + competitor + ": "+model.calculatePoints(model.hands.get(competitor+","+table)));
-												if (model.hands.containsKey(competitor) && model.hands.containsKey(competitor+","+table))
-												{
+												
 													if (model.calculatePoints(model.hands.get(competitor+","+table)) > dealerScore && model.calculatePoints(model.hands.get(competitor+","+table)) < 22)
 													{
 														if (victors.equals(""))
@@ -786,21 +795,16 @@ public class WebServer {
 														else
 															victors = victors + ", " + competitor;
 													}
-												}
-												else
-												{
-													out.println("<br> Table does not contain your current hand");
-													
-												}
+												
 											}
 											if (victors.equals(""))
 											{
-												out.println("<br> Dealer won");
+												out.println("<br><center><h1> Dealer won </h1></center>");
 
 											}
 											else 
 											{
-												out.println("<br>"+victors+" won");
+												out.println("<br><center><h1>"+victors+" won </h1></center>");
 
 											}
 										}
@@ -862,7 +866,7 @@ public class WebServer {
 
 							}
 							if (model.roomsPhase.get(table) == 0)
-								out.println("<html><head><body><center><br><a href=\"/?join="+user+"&table="+table+"\">Click here to play again!</a>");
+								out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?userStay="+user+"&table="+table+"\" /></head><body><center><br><a href=\"/?join="+user+"&table="+table+"\">Click here to play again!</a>");
 							
 							out.println("</center></body></html>");
 							out.flush();
@@ -897,6 +901,9 @@ public class WebServer {
 							user = user.replace("GET /?username=", "");
 							String[] tokens = user.split(" ");
 							user = tokens[0];
+							user = user.replaceAll("\\+", " ");
+							user = user.replaceAll("%20", " ");
+							user = user.replaceAll("%2B", " ");
 
 							// Send the response
 							// Send the headers
@@ -906,7 +913,7 @@ public class WebServer {
 							// this blank line signals the end of the headers
 							out.println("");
 							// Send the HTML page
-							out.println("<html><head></head><body><H1>Lobby</H1>");
+							out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?username="+user+"\" /></head><body><H1>Lobby</H1>");
 
 							out.println("<H2>Welcome "+user+"</H2>");
 							for (String room : model.rooms.keySet())
