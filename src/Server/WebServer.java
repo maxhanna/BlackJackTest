@@ -725,9 +725,6 @@ public class WebServer {
 
 												String theUserName = userHands.replace(","+table,"");
 												out.println("<center><br><table><tr><td><h1>"+theUserName+"("+model.calculatePoints(unEditedHand)+" points)<h1> </td> <td>" + theHand +"</td></tr></table></center>");
-
-
-
 											}
 											else
 											{
@@ -742,9 +739,6 @@ public class WebServer {
 												theHand = theHand.replaceAll(",", "</td></tr><tr><td></td><td>");
 												String theUserName = userHands.replace(","+table,"");
 												out.println("<center><br><table><tr><td><h2>"+theUserName + "("+model.calculatePoints(unEditedHand)+" points)</h2></td> <td>" + theHand + "</td></tr></table></center>");
-
-
-
 											}
 										}
 									}

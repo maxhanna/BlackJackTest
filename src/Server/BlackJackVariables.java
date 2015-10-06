@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 
-import javax.swing.Timer;
-
 public class BlackJackVariables {
 	public HashMap<String,Integer> rooms = new HashMap<String,Integer>();
 	public HashMap<String,Integer> roomsPhase = new HashMap<String,Integer>();
@@ -14,7 +12,37 @@ public class BlackJackVariables {
 	public HashMap<String,String> hands = new HashMap<String,String>();
 	public HashMap<String,String> stays = new HashMap<String,String>();
 	public HashMap<String,Date> roomRestartTimes = new HashMap<String,Date>();
-	
+	public boolean splitPossible(String cards)
+	{
+		int aceCount = cards.length() - cards.replace("Ace", "").length();
+		int kingCount = cards.length() - cards.replace("King", "").length();
+		int queenCount = cards.length() - cards.replace("Queen", "").length();
+		int jackCount = cards.length() - cards.replace("Jack", "").length();
+		int tenCount = cards.length() - cards.replace("10", "").length();
+		int nineCount = cards.length() - cards.replace("9", "").length();
+		int eightCount = cards.length() - cards.replace("8", "").length();
+		int sevenCount = cards.length() - cards.replace("7", "").length();
+		int sixCount = cards.length() - cards.replace("6", "").length();
+		int fiveCount = cards.length() - cards.replace("5", "").length();
+		int fourCount = cards.length() - cards.replace("4", "").length();
+		int threeCount = cards.length() - cards.replace("3", "").length();
+		int twoCount = cards.length() - cards.replace("2", "").length();
+		aceCount = aceCount / 3;
+		kingCount = kingCount / 4;
+		queenCount = queenCount / 5;
+		jackCount = jackCount / 4;
+		tenCount = tenCount / 2;
+		if ((cards.length() - cards.replace(",", "").length()) > 2)
+			return false;
+		else if (aceCount > 1 || kingCount > 1 || queenCount > 1
+				|| jackCount > 1 || tenCount > 1 || nineCount > 1
+				|| eightCount > 1 || sevenCount > 1 || sixCount > 1 
+				|| fiveCount > 1 || fourCount > 1 || threeCount > 1
+				|| twoCount > 1)
+			return true;
+		else 
+			return false;
+	}
 	public int calculatePoints(String cards)
 	{
 		//System.out.println("calculating score for: " + cards);
