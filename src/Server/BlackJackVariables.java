@@ -11,6 +11,7 @@ public class BlackJackVariables {
 	public ArrayList<String> deck = new ArrayList<String>();
 	public HashMap<String,String> hands = new HashMap<String,String>();
 	public HashMap<String,String> stays = new HashMap<String,String>();
+	public HashMap<String,String> splits = new HashMap<String,String>();
 	public HashMap<String,Date> roomRestartTimes = new HashMap<String,Date>();
 	public boolean splitPossible(String cards)
 	{
@@ -32,7 +33,7 @@ public class BlackJackVariables {
 		queenCount = queenCount / 5;
 		jackCount = jackCount / 4;
 		tenCount = tenCount / 2;
-		if ((cards.length() - cards.replace(",", "").length()) > 2)
+		if ((cards.length() - cards.replace(",", "").length()) > 1)
 			return false;
 		else if (aceCount > 1 || kingCount > 1 || queenCount > 1
 				|| jackCount > 1 || tenCount > 1 || nineCount > 1
@@ -188,6 +189,8 @@ public class BlackJackVariables {
 			}
 		}
 
+		if ((cards.length() - cards.replace(",", "").length()) > 4)
+			count = 21;
 		//System.out.println("score : " + count);
 		return count;
 	}
@@ -283,6 +286,7 @@ public class BlackJackVariables {
 	{
 		rooms.put("Carleton Room", 0);
 		stays.put("Carleton Room", "");
+		splits.put("Carleton Room", "");
 		roomsPhase.put("Carleton Room", 0);
 		createDeck(deck);
 	}
