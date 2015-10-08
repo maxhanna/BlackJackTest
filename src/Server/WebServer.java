@@ -10,11 +10,12 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class WebServer {
-	String serverAddress = "192.168.2.13:8000";
+	//Declaring global variables 
 	BlackJackVariables model = new BlackJackVariables();
+	ServerSocket s;
 
+	//start contains main while loop.
 	protected void start() {
-		ServerSocket s;
 
 		System.out.println("Webserver starting up on port 8000");
 		System.out.println("(press ctrl-c to exit)");
@@ -27,6 +28,7 @@ public class WebServer {
 		}
 
 		System.out.println("Waiting for requests");
+		//Always wait for requests to handle
 		for (;;) {
 			try {
 				// wait for a connection
@@ -38,6 +40,9 @@ public class WebServer {
 				// headers.
 				try{
 					while (true) {
+						
+						//first things first, clean up rooms.
+						//reinitialize all tables that displayed scores for a minute
 						Date currDate = new Date();
 						for (String table : model.roomRestartTimes.keySet())
 						{
@@ -70,15 +75,24 @@ public class WebServer {
 								System.out.println("Setting phase to 0 for table: "+table);
 							}
 						}
+						//Accept a new connection when it comes in.
 						Socket remote = s.accept();
 						System.out.println("----------- REQUEST --------");
-						//remote is now the connected socket
+						/*	remote is now the connected socket and
+						 *  in/out variables handle sending/receiving info
+						 *  to and from client.								*/
 						BufferedReader in = new BufferedReader(new InputStreamReader(
 								remote.getInputStream()));
 						PrintWriter out = new PrintWriter(remote.getOutputStream());
 						String  thisLine = null;
 						thisLine = in.readLine();
-
+						/* 
+						 * 	thisLine reads in any new requests from a client.
+						 * 	The next bunch of if statements parse thisLine
+						 * 	and take appropriate action to display information.
+						 */
+						
+						//if the user decided to split his cards (legally)
 						if (thisLine!=null && thisLine.contains("GET /?userSplit="))
 						{
 							System.out.println(thisLine);
@@ -140,6 +154,9 @@ public class WebServer {
 							break;
 							
 						}
+						/* join displays table data if user already joined table,
+							else join adds a user to the table, and gives them some cards
+							if table is in the correct phase.								 */
 						else if (thisLine.contains("GET /?join="))
 						{
 							System.out.println(thisLine);
@@ -192,6 +209,7 @@ public class WebServer {
 								name.replace("Second Hand", "");
 							out.println("<H2>Welcome "+name+"</H2>");
 							out.println("<br>");
+							//If the game is already over, display all hands and display time until the room reinitializes.
 							if (model.stays.get(table)!=null && model.stays.get(table).contains("Dealer"))
 							{		
 								currDate = new Date();
@@ -203,7 +221,7 @@ public class WebServer {
 								{
 									int diffy = 60-(int)diffSeconds;
 									out.println("<center>There are "+ diffy + " seconds until table restarts for next round!</center>");	
-									//display winner(s),
+									//determine and display winner(s)
 									int dealerScore = model.calculatePoints(model.hands.get("Dealer,"+table));
 									if (dealerScore > 21)
 										dealerScore = 0;
@@ -1027,7 +1045,8 @@ public class WebServer {
 							break;
 
 						}
-						else if (thisLine.contains("GET /?username=Dealer")||thisLine.contains("GET /?username=dealer")||(thisLine.contains("GET /?username=")&&thisLine.contains("&")))
+						//this checks if user entered an invalid name
+						else if (thisLine.contains("GET /?username=Dealer")||thisLine.contains("GET /?username=dealer")||(thisLine.contains("GET /?username=") && thisLine.contains("&")) ||(thisLine.contains("GET /?username=") && (thisLine.contains("Second%20Hand")||thisLine.contains("Second+Hand")||thisLine.contains("Second Hand"))))
 						{
 							System.out.println(thisLine);
 							// Send the response
@@ -1047,6 +1066,7 @@ public class WebServer {
 							remote.close();
 							break;
 						}
+						//this will send the page that contains the list of tables and users available to play.
 						else if (thisLine.contains("GET /?username="))
 						{
 							System.out.println(thisLine);
