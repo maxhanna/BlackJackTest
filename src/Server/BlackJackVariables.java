@@ -189,7 +189,7 @@ public class BlackJackVariables {
 			}
 		}
 
-		if ((cards.length() - cards.replace(",", "").length()) > 4)
+		if ((cards.length() - cards.replace(",", "").length()) > 6)
 			count = 21;
 		//System.out.println("score : " + count);
 		return count;
