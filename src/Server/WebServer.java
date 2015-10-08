@@ -85,7 +85,22 @@ public class WebServer {
 								remote.getInputStream()));
 						PrintWriter out = new PrintWriter(remote.getOutputStream());
 						String  thisLine = null;
-						thisLine = in.readLine();
+						try
+						{
+							thisLine = in.readLine();
+						}
+						catch (java.net.SocketException se)
+						{
+							System.out.println("A user has disconnected.");
+							s.close();
+							s = new ServerSocket(8000);
+							remote = s.accept();
+							in = new BufferedReader(new InputStreamReader(
+									remote.getInputStream()));
+							out = new PrintWriter(remote.getOutputStream());
+							thisLine = in.readLine();
+							System.out.println("Server socket reinitialized.");
+						}
 						/* 
 						 * 	thisLine reads in any new requests from a client.
 						 * 	The next bunch of if statements parse thisLine

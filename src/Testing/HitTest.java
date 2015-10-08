@@ -8,8 +8,10 @@ import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import junit.framework.Test;
+import junit.framework.TestCase;
 
-public class JoinGame {
+public class HitTest extends TestCase{
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -18,18 +20,17 @@ public class JoinGame {
   @Before
   public void setUp() throws Exception {
     driver = new FirefoxDriver();
-    baseUrl = "http://192.168.2.13:8000";
+    baseUrl = "http://localhost:8000/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
-  @Test
-  public void testJoinAGame() throws Exception {
+  public void testHit() throws Exception {
     driver.get(baseUrl + "/");
     driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("maxhanna");
+    driver.findElement(By.id("username")).sendKeys("max");
     driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
     driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-    driver.findElement(By.xpath("//input[@value='Stay']")).click();
+    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
   }
 
   @After
