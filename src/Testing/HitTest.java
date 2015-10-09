@@ -20,16 +20,13 @@ public class HitTest extends TestCase{
   @Before
   public void setUp() throws Exception {
     driver = new FirefoxDriver();
-    baseUrl = "http://localhost:8000/";
+    baseUrl = "http://localhost:8000/?join=maxhanna&table=Carleton+Room";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
   public void testHit() throws Exception {
-    driver.get(baseUrl + "/");
-    driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("max");
-    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
+    driver.get(baseUrl);
+   // assert();
     driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
   }
 

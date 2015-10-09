@@ -1,18 +1,15 @@
-package Testing;
+package com.example.tests;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
-import junit.framework.Test;
-import junit.framework.TestCase;
-
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class JoinGameTest extends TestCase{
+public class WaitForNextGame {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -21,16 +18,14 @@ public class JoinGameTest extends TestCase{
   @Before
   public void setUp() throws Exception {
     driver = new FirefoxDriver();
-    baseUrl = "http://localhost:8000";
+    baseUrl = "http://localhost:8000/?join=maxhanna&table=Carleton+Room";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
-  public void testJoinAGame() throws Exception {
-    driver.get(baseUrl);
-    driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("maxhanna");
-    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
+  @Test
+  public void testWaitForNextGame() throws Exception {
+    assertEquals("", driver.findElement(By.cssSelector("center")).getText());
+    assertTrue(driver.findElement(By.cssSelector("input[type=\"submit\"]")).isDisplayed());
   }
 
   @After
