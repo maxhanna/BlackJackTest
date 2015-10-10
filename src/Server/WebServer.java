@@ -200,26 +200,7 @@ public class WebServer {
 								// this blank line signals the end of the headers
 								out.println("");
 								// Send the HTML page
-								out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?join="+user+"&table="+table+"\" />"
-										+ "<script type=\"text/javascript\">"
-										+ "function makeMeGlow()"
-										+ "{  var myButton =document.getElementById('theButton');"
-										+ "myButton.style.background = \"black\";"
-										+ "myButton.style.color = \"white\";"
-										+ "myButton.value = \"Stay\"; "
-										+ "setTimeout('nowImGlowing()', 2000);"
-										+ "}"
-
-									+ "function nowImGlowing()"
-									+"{  var myButton1 =document.getElementById('theButton');"
-
-									+"myButton1.style.background = \"gold\";"
-									+"myButton1.style.color = \"black\";"
-									+ "myButton1.value = \"Stay\"; "
-									+ "setTimeout('makeMeGlow()', 2000);"
-									+ "}"
-									+ "</script>"
-									+ "</head><body onLoad=\"makeMeGlow()\"><H1>"+table+"</H1>");
+								out.println(returnHtmlHeaders(user,table)+"<H1>"+table+"</H1>");
 								String name = user;
 								if (name.contains("Second Hand"))
 									name.replace("Second Hand", "");
@@ -327,7 +308,7 @@ public class WebServer {
 												out.println("<center><br><table><tr><td><h2>"+theUserName + "("+model.calculatePoints(unEditedHand)+" points)</h2></td> <td>" + theHand + "</td></tr></table></center>");
 												if (model.stays.get(table).contains(theUserName))
 												{
-													out.println("<center>"+theUserName + " stays</center>");	
+													out.println("<center><h3>"+theUserName + " stays</h3></center>");	
 												}
 											}
 
@@ -440,7 +421,7 @@ public class WebServer {
 												{
 													String theHand = model.hands.get(userHands);
 													String[] cards = theHand.split(",");
-													cards[1] = "X of X";
+													cards[0] = "X of X";
 													theHand = "";
 													for(String card : cards)
 														theHand = theHand + ", "+card;
@@ -455,7 +436,7 @@ public class WebServer {
 													out.println("<center><br><table><tr><td><h2>"+theUserName + "("+model.calculatePoints(unEditedHand)+" points)</h2></td> <td>" + theHand + "</td></tr></table></center>");
 													if (model.stays.get(table).contains(theUserName))
 													{
-														out.println("<center>"+theUserName + " stays</center>");	
+														out.println("<center><h3>"+theUserName + " stays</h3></center>");	
 													}
 												}
 											}
@@ -520,7 +501,7 @@ public class WebServer {
 													String theHand = model.hands.get(userHands);
 
 													String[] cards = theHand.split(",");
-													cards[1] = "X of X";
+													cards[0] = "X of X";
 													theHand = "";
 													for(String card : cards)
 														theHand = theHand + ", "+card;
@@ -535,7 +516,7 @@ public class WebServer {
 													out.println("<center><br><table><tr><td><h2>"+theUserName + "("+model.calculatePoints(unEditedHand)+" points)</h2></td> <td>" + theHand + "</td></tr></table></center>");
 													if (model.stays.get(table).contains(theUserName))
 													{
-														out.println("<center>"+theUserName + " stays</center>");	
+														out.println("<center><h3>"+theUserName + " stays</h3></center>");	
 													}
 												}
 											}
@@ -585,26 +566,7 @@ public class WebServer {
 								// this blank line signals the end of the headers
 								out.println("");
 								// Send the HTML page
-								out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?join="+user+"&table="+table+"\" />"
-										+ "<script type=\"text/javascript\">"
-										+ "function makeMeGlow()"
-										+ "{  var myButton =document.getElementById('theButton');"
-										+ "myButton.style.background = \"black\";"
-										+ "myButton.style.color = \"white\";"
-										+ "myButton.value = \"Stay\"; "
-										+ "setTimeout('nowImGlowing()', 2000);"
-										+ "}"
-
-									+ "function nowImGlowing()"
-									+"{  var myButton1 =document.getElementById('theButton');"
-
-									+"myButton1.style.background = \"gold\";"
-									+"myButton1.style.color = \"black\";"
-									+ "myButton1.value = \"Stay\"; "
-									+ "setTimeout('makeMeGlow()', 2000);"
-									+ "}"
-									+ "</script>"
-									+ "</head><body onLoad=\"makeMeGlow()\"><H1>"+table+"</H1>");
+								out.println(returnHtmlHeaders(user,table)+"<H1>"+table+"</H1>");
 								String name = user;
 								if (name.contains("Second Hand"))
 									name.replace("Second Hand", "");
@@ -688,7 +650,7 @@ public class WebServer {
 										{
 											String theHand = model.hands.get(userHands);
 											String[] cards = theHand.split(",");
-											cards[1] = "X of X";
+											cards[0] = "X of X";
 											theHand = "";
 											for(String card : cards)
 												theHand = theHand + ", "+card;
@@ -703,7 +665,7 @@ public class WebServer {
 											out.println("<center><br><table><tr><td><h2>"+theUserName + "("+model.calculatePoints(unEditedHand)+" points)</h2></td> <td>" + theHand + "</td></tr></table></center>");
 											if (model.stays.get(table).contains(theUserName))
 											{
-												out.println("<center>"+theUserName + " stays</center>");	
+												out.println("<center><h3>"+theUserName + " stays</h3></center>");	
 											}
 										}
 									}
@@ -741,7 +703,7 @@ public class WebServer {
 
 								// this blank line signals the end of the headers
 								out.println("");
-								out.println("<html><head><meta http-equiv=\"refresh\" content=\"0;url=/?join="+user+"&table="+table+"\" /></head><body>");
+								out.println(returnHtmlHeaders(user,table));
 								if (model.roomsPhase.get(table)==null)
 								{
 									model.roomsPhase.put(table, 0);
@@ -1040,7 +1002,7 @@ public class WebServer {
 														out.println("<center><br><table><tr><td><h2>"+theUserName + "("+model.calculatePoints(unEditedHand)+" points)</h2></td> <td>" + theHand + "</td></tr></table></center>");
 														if (model.stays.get(table).contains(theUserName))
 														{
-															out.println("<center>"+theUserName + " stays</center>");	
+															out.println("<center><h3>"+theUserName + " stays</h3></center>");	
 														}
 													}
 												}
@@ -1053,7 +1015,7 @@ public class WebServer {
 
 								}
 								if (model.roomsPhase.get(table) == 0)
-									out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?join="+user+"&table="+table+"\" /></head><body><center><br><a href=\"/?join="+user+"&table="+table+"\">Click here to play again!</a>");
+									out.println("<center><br><a href=\"/?join="+user+"&table="+table+"\">Click here to play again!</a>");
 
 								out.println("</center></body></html>");
 								out.flush();
@@ -1156,7 +1118,29 @@ public class WebServer {
 			}
 		}
 	}
+	public String returnHtmlHeaders(String user,String table)
+	{
+		return "<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?join="+user+"&table="+table+"\" />"
+				+ "<script type=\"text/javascript\">"
+				+ "function makeMeGlow()"
+				+ "{  var myButton =document.getElementById('theButton');"
+				+ "myButton.style.background = \"black\";"
+				+ "myButton.style.color = \"white\";"
+				+ "myButton.value = \"Stay\"; "
+				+ "setTimeout('nowImGlowing()', 2000);"
+				+ "}"
 
+			+ "function nowImGlowing()"
+			+"{  var myButton1 =document.getElementById('theButton');"
+
+			+"myButton1.style.background = \"gold\";"
+			+"myButton1.style.color = \"black\";"
+			+ "myButton1.value = \"Stay\"; "
+			+ "setTimeout('makeMeGlow()', 2000);"
+			+ "}"
+			+ "</script>"
+			+ "</head><body onLoad=\"makeMeGlow()\">";
+	}
 	/**
 	 * Start the application.
 	 * 
