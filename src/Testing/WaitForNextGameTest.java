@@ -23,7 +23,8 @@ public class WaitForNextGameTest extends TestCase {
 		driver.get(baseUrl);
 		assertTrue(driver.findElement(By.cssSelector("center")).getText().contains("There are")
 				&& driver.findElement(By.cssSelector("center")).getText().contains(" seconds until table restarts for next round!"));
-		Thread.sleep(60000);        
+		Thread.sleep(30000); 
+		
 		assertTrue(driver.findElement(By.cssSelector("input[type=\"submit\"]")).isDisplayed());
 	}
 
