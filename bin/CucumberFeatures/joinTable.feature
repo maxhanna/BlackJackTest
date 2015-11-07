@@ -1,4 +1,4 @@
-Feature: To test login form works when there are no errors
+Feature: To test joining a game works when there are no errors
 
 Scenario: Check login form is validated when there are no errors
 Given I am on my Blackjack website

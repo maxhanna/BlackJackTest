@@ -192,6 +192,38 @@ public class WebServer {
 								table = table.replaceAll("%20", " ");
 								table = table.replaceAll("%2B", " ");
 								table.trim();
+								if (model.personRestartTimes.get(user)==null)
+								{
+									System.out.println("creating timer for " + user);
+									model.personRestartTimes.put(user,new Date());
+								}
+								//this if statement prevents an idle user.
+								if (model.personRestartTimes.get(user)!=null && !model.stays.get(table).contains(user))
+								{
+									long diff = currDate.getTime() - model.personRestartTimes.get(user).getTime();
+
+									long diffMinutes = diff / (60 * 1000) % 60;
+									if (diffMinutes>0.2)
+									{
+										model.hands.remove(user+","+table);
+										model.personRestartTimes.remove(user);
+										int num = model.rooms.get(table) - 1;
+										model.rooms.remove(table);
+										model.rooms.put(table,num);
+										// Send the response
+										// Send the headers
+										out.println("HTTP/1.0 200 OK");
+										out.println("Content-Type: text/html");
+										out.println("Server: Bot");
+										// this blank line signals the end of the headers
+										out.println("");
+										// Send the HTML page
+										out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?username="+user+"\" /></head><body></body></html>");
+										out.flush();
+										remote.close();
+										break;
+									}
+								}
 								// Send the response
 								// Send the headers
 								out.println("HTTP/1.0 200 OK");

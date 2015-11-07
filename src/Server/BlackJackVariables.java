@@ -13,6 +13,8 @@ public class BlackJackVariables {
 	public HashMap<String,String> stays = new HashMap<String,String>();
 	public HashMap<String,String> splits = new HashMap<String,String>();
 	public HashMap<String,Date> roomRestartTimes = new HashMap<String,Date>();
+	//person restart times contains the join game time of the user
+	public HashMap<String,Date> personRestartTimes = new HashMap<String,Date>();
 	public boolean splitPossible(String cards)
 	{
 		int aceCount = cards.length() - cards.replace("Ace", "").length();

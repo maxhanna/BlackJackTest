@@ -12,7 +12,7 @@
         "steps": [
           {
             "result": {
-              "duration": 24456866378,
+              "duration": 29434043831,
               "status": "passed"
             },
             "line": 4,
@@ -24,7 +24,7 @@
           },
           {
             "result": {
-              "duration": 645338841,
+              "duration": 842076384,
               "status": "passed"
             },
             "line": 5,
@@ -36,7 +36,7 @@
           },
           {
             "result": {
-              "duration": 2230888185,
+              "duration": 212412743,
               "status": "passed"
             },
             "line": 6,
@@ -48,7 +48,7 @@
           },
           {
             "result": {
-              "duration": 1302523761,
+              "duration": 2643902093,
               "status": "passed"
             },
             "line": 7,
@@ -70,9 +70,8 @@
         "steps": [
           {
             "result": {
-              "duration": 26218318533,
-              "error_message": "org.openqa.selenium.NoSuchElementException: Unable to locate element: {\"method\":\"id\",\"selector\":\"submit\"}\nCommand duration or timeout: 2.58 seconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00272.48.0\u0027, revision: \u0027b7b081a\u0027, time: \u00272015-10-07 15:45:39\u0027\nSystem info: host: \u0027Glitch\u0027, ip: \u0027192.168.2.13\u0027, os.name: \u0027Windows 8.1\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.3\u0027, java.version: \u00271.8.0_45\u0027\nDriver info: org.openqa.selenium.firefox.FirefoxDriver\nCapabilities [{applicationCacheEnabled\u003dtrue, rotatable\u003dfalse, handlesAlerts\u003dtrue, databaseEnabled\u003dtrue, version\u003d41.0.1, platform\u003dWINDOWS, nativeEvents\u003dfalse, acceptSslCerts\u003dtrue, webStorageEnabled\u003dtrue, locationContextEnabled\u003dtrue, browserName\u003dfirefox, takesScreenshot\u003dtrue, javascriptEnabled\u003dtrue, cssSelectorsEnabled\u003dtrue}]\nSession ID: 62190488-2cda-4ea6-bb24-ab2ed08cf229\n*** Element info: {Using\u003did, value\u003dsubmit}\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)\r\n\tat java.lang.reflect.Constructor.newInstance(Unknown Source)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:647)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:353)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:403)\r\n\tat org.openqa.selenium.By$ById.findElement(By.java:218)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:345)\r\n\tat Testing.StepDefinitions.I_have_logged_in(StepDefinitions.java:39)\r\n\tat ✽.Given I have already logged in(joinTable.feature:10)\r\nCaused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: {\"method\":\"id\",\"selector\":\"submit\"}\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00272.48.0\u0027, revision: \u0027b7b081a\u0027, time: \u00272015-10-07 15:45:39\u0027\nSystem info: host: \u0027Glitch\u0027, ip: \u0027192.168.2.13\u0027, os.name: \u0027Windows 8.1\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.3\u0027, java.version: \u00271.8.0_45\u0027\nDriver info: driver.version: unknown\r\n\tat \u003canonymous class\u003e.FirefoxDriver.prototype.findElementInternal_(file:///C:/Users/Max/AppData/Local/Temp/anonymous507182907323430821webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10659)\r\n\tat \u003canonymous class\u003e.FirefoxDriver.prototype.findElement(file:///C:/Users/Max/AppData/Local/Temp/anonymous507182907323430821webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10668)\r\n\tat \u003canonymous class\u003e.DelayedCommand.prototype.executeInternal_/h(file:///C:/Users/Max/AppData/Local/Temp/anonymous507182907323430821webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12534)\r\n\tat \u003canonymous class\u003e.DelayedCommand.prototype.executeInternal_(file:///C:/Users/Max/AppData/Local/Temp/anonymous507182907323430821webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12539)\r\n\tat \u003canonymous class\u003e.DelayedCommand.prototype.execute/\u003c(file:///C:/Users/Max/AppData/Local/Temp/anonymous507182907323430821webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12481)\r\n",
-              "status": "failed"
+              "duration": 28665180610,
+              "status": "passed"
             },
             "line": 10,
             "name": "I have already logged in",
@@ -83,7 +82,8 @@
           },
           {
             "result": {
-              "status": "skipped"
+              "duration": 2822098029,
+              "status": "passed"
             },
             "line": 11,
             "name": "I click on the join table button",
@@ -94,7 +94,8 @@
           },
           {
             "result": {
-              "status": "skipped"
+              "duration": 58132,
+              "status": "passed"
             },
             "line": 12,
             "name": "I should be on game room page",
