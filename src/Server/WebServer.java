@@ -1077,7 +1077,7 @@ public class WebServer {
 											+ "<form>"
 											+  "<input type=\"hidden\" name=\"join\" value=\""+user+"\">"
 											+  "<input type=\"hidden\" name=\"table\" value=\""+room+"\">"
-											+  "<input type=\"submit\" value=\"Join\">"
+											+  "<input type=\"submit\" value=\"Join\" id=submit>"
 											+ "</form>");
 								}
 								out.println("</center></body></html>");
@@ -1102,7 +1102,7 @@ public class WebServer {
 								out.println("<H2>Enter A Username</H2>");
 								out.println("<form>Username: <input type=\"text\""
 										+ " id=\"username\" name=\"username\"><br>"
-										+ "<input type=\"submit\" value=\"Submit\"></form></body></html>");
+										+ "<input type=\"submit\" value=\"Submit\" id=submit></form></body></html>");
 								out.flush();
 								remote.close();
 								break;
