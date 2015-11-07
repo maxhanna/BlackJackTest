@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 public class BlackJackVariables {
 	public HashMap<String,Integer> rooms = new HashMap<String,Integer>();
+	public HashMap<String,Integer> roomAIs = new HashMap<String,Integer>();
+	
 	public HashMap<String,Integer> roomsPhase = new HashMap<String,Integer>();
 	public ArrayList<String> deck = new ArrayList<String>();
 	public HashMap<String,String> hands = new HashMap<String,String>();
@@ -287,6 +289,7 @@ public class BlackJackVariables {
 	public BlackJackVariables()
 	{
 		rooms.put("Carleton Room", 0);
+		roomAIs.put("Carleton Room", 0);
 		stays.put("Carleton Room", "");
 		splits.put("Carleton Room", "");
 		roomsPhase.put("Carleton Room", 0);

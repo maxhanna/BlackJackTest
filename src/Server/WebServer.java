@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -108,6 +109,8 @@ public class WebServer {
 						 */
 						if (thisLine!=null)
 						{
+
+							System.out.println("New Req: " + thisLine);
 							//if the user decided to split his cards (legally)
 							if (thisLine.contains("GET /?userSplit="))
 							{
@@ -203,8 +206,9 @@ public class WebServer {
 									long diff = currDate.getTime() - model.personRestartTimes.get(user).getTime();
 
 									long diffMinutes = diff / (60 * 1000) % 60;
-									if (diffMinutes>0.2)
+									if (diffMinutes>3)
 									{
+										//remove all the user's data from that table
 										model.hands.remove(user+","+table);
 										model.personRestartTimes.remove(user);
 										int num = model.rooms.get(table) - 1;
@@ -362,6 +366,11 @@ public class WebServer {
 										model.roomsPhase.put(table, 1);
 										model.shuffleDeck(model.deck);
 										model.hands.put("Dealer,"+table, model.serveCards(model.deck));
+										if (model.roomAIs.get(table)>0)
+										{
+											for (int x = 0; x<model.roomAIs.get(table); x++)
+												model.hands.put("AI"+x+","+table, model.serveCards(model.deck));
+										}
 										System.out.println("Initialize game table: "+table);
 									}
 									if (model.roomsPhase.get(table)!=null 
@@ -598,111 +607,9 @@ public class WebServer {
 								// this blank line signals the end of the headers
 								out.println("");
 								// Send the HTML page
-								out.println(returnHtmlHeaders(user,table)+"<H1>"+table+"</H1>");
-								String name = user;
-								if (name.contains("Second Hand"))
-									name.replace("Second Hand", "");
-								out.println("<H2>Welcome "+name+"</H2>");
-								out.println("<br>");
-								for (String userHands:model.hands.keySet())
-								{
-									if (userHands.contains(","+table))
-									{
-										if (userHands.contains(user+","+table) || userHands.contains(user+" Second Hand,"+table))
-										{
-											//The new user's hand
-											String theHand = model.hands.get(userHands);
-
-											String unEditedHand = theHand;
-											theHand.replace(",", " ");
-
-											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
-											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
-											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
-											theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
-											theHand = theHand.replaceAll(",", "</tr><tr><td></td><td>");
-
-											String theUserName = userHands.replace(","+table,"");
-											System.out.println(unEditedHand);	
-											int score = model.calculatePoints(unEditedHand);
-
-											out.println("<center><br><table><tr><td><h1>"+name+"("+score+" points)</h1></td> <td>" + theHand +"</td></tr></table></center>");
-											System.out.println(score);
-											//check to see if player already is staying
-											String[] staying = model.stays.get(table).split(",");
-											boolean flag = false;
-											//cycle through each player, check if they match your username
-											for (String stayer : staying)
-											{
-												if (stayer.equals(theUserName))
-													flag = true;
-											}
-											//if no one matches your username, allow player to hit, stay,split.
-											if (!flag)
-											{
-												if (score < 21)
-												{
-													out.println("<center><table><tr><td>"
-															+ "<form>"
-															+  "<input type=\"hidden\" name=\"userHit\" value=\""+theUserName+"\">"
-															+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-															+  "<input type=\"submit\" value=\"Hit\">"
-															+ "</form>");
-												}
-												if (score > 20)
-												{
-													out.println("</td><td><center><form>"
-															+  "<input type=\"hidden\" name=\"userStay\" value=\""+theUserName+"\">"
-															+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-															+  "<input type=\"submit\" id=\"theButton\" value=\"GLOW\">"
-															+ "</form>");
-												}
-												else
-												{
-													out.println("</td><td><form>"
-															+  "<input type=\"hidden\" name=\"userStay\" value=\""+theUserName+"\">"
-															+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-															+  "<input type=\"submit\" value=\"Stay\">"
-															+ "</form>");
-												}
-
-												if (model.splitPossible(unEditedHand))
-												{
-													out.println("</td><td><form>"
-															+  "<input type=\"hidden\" name=\"userSplit\" value=\""+theUserName+"\">"
-															+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-															+  "<input type=\"submit\" value=\"Split\">"
-															+ "</form>");
-
-												}
-											}
-											out.println("</td></tr></table></center>");
-										}
-										else
-										{
-											String theHand = model.hands.get(userHands);
-											String[] cards = theHand.split(",");
-											cards[0] = "X of X";
-											theHand = "";
-											for(String card : cards)
-												theHand = theHand + ", "+card;
-											String unEditedHand = theHand;
-
-											theHand = theHand.replace("spades", "<font size=13>&#9824;</font>");
-											theHand = theHand.replace("hearts", "<font size=13>&#9829;</font>");
-											theHand = theHand.replace("clubs", "<font size=13>&#9827;</font>");
-											theHand = theHand.replace("diamonds", "<font size=13>&#9830;</font>");
-											theHand = theHand.replaceAll(",", "</td></tr><tr><td></td><td>");
-											String theUserName = userHands.replace(","+table,"");
-											out.println("<center><br><table><tr><td><h2>"+theUserName + "("+model.calculatePoints(unEditedHand)+" points)</h2></td> <td>" + theHand + "</td></tr></table></center>");
-											if (model.stays.get(table).contains(theUserName))
-											{
-												out.println("<center><h3>"+theUserName + " stays</h3></center>");	
-											}
-										}
-									}
-								}
-								out.println("</center></body></html>");
+								out.println("<html><head><meta http-equiv=\"refresh\" content=\"0;url=/?join="+user+"&table="+table+"\" /></head><body></body></html>");
+								
+								
 								out.flush();
 								remote.close();
 								break;
@@ -726,6 +633,7 @@ public class WebServer {
 								user = user.replaceAll("\\+", " ");
 								user = user.replaceAll("%20", " ");
 								user = user.replaceAll("%2B", " ");
+								model.personRestartTimes.remove(user);
 								table.trim();
 								// Send the response
 								// Send the headers
@@ -735,7 +643,7 @@ public class WebServer {
 
 								// this blank line signals the end of the headers
 								out.println("");
-								out.println(returnHtmlHeaders(user,table));
+								out.println("<html><head><meta http-equiv=\"refresh\" content=\"0;url=/?join="+user+"&table="+table+"\" /></head><body></body></html>");
 								if (model.roomsPhase.get(table)==null)
 								{
 									model.roomsPhase.put(table, 0);
@@ -779,12 +687,7 @@ public class WebServer {
 
 
 										// Send the HTML page
-										out.println("<H1>"+table+"</H1>");
-										String name = user;
-										if (name.contains("Second Hand"))
-											name.replace("Second Hand", "");
-										out.println("<H2>Welcome "+name+", now displaying results</H2>");
-										out.println("<br>");
+										
 										if (model.stays.get(table).contains("Dealer"))
 										{
 											//dealer's final points were determined
@@ -843,6 +746,22 @@ public class WebServer {
 										}
 										else
 										{
+											for (int aiCount = 0 ; aiCount < model.roomAIs.get(table); aiCount++)
+											{
+												int aiPoints = model.calculatePoints(model.hands.get("AI"+aiCount+","+table));
+												String aiHand = model.hands.get("AI"+aiCount+","+table);
+												while (aiPoints<17)
+												{
+													aiHand = aiHand + ","+model.hit(model.deck);
+													aiPoints = model.calculatePoints(aiHand);
+													model.hands.remove("AI"+aiCount+","+table);
+													model.hands.put("AI"+aiCount+","+table,aiHand);
+												}
+												String stayingUsers = model.stays.get(table);
+												stayingUsers = stayingUsers + ",AI"+aiCount;
+												model.stays.remove(table);
+												model.stays.put(table,stayingUsers);
+											}
 											int dealerPoints = model.calculatePoints(model.hands.get("Dealer,"+table));
 											String dealerHand = model.hands.get("Dealer,"+table);
 											while (dealerPoints<17)
@@ -901,7 +820,7 @@ public class WebServer {
 											{
 												if (userHands.contains(user+","+table))
 												{
-													//The new user's
+													//The new user's hand
 													String theHand = model.hands.get(userHands);
 													String unEditedHand = theHand;
 													theHand.replace(",", " ");
@@ -1076,18 +995,25 @@ public class WebServer {
 								remote.close();
 								break;
 							}
-							//this will send the page that contains the list of tables and users available to play.
-							else if (thisLine.contains("GET /?username="))
+							else if (thisLine.contains("GET /createtable"))
 							{
 								System.out.println(thisLine);
-								String user = thisLine;
-								user = user.replace("GET /?username=", "");
-								String[] tokens = user.split(" ");
-								user = tokens[0];
-								user = user.replaceAll("\\+", " ");
-								user = user.replaceAll("%20", " ");
-								user = user.replaceAll("%2B", " ");
-
+								String table = thisLine;
+								String username = "";
+								int numAI = 0;
+								table = table.replace("GET /createtable?tablename=", "");
+								String[] tokens = table.split("&");
+								table = tokens[0];
+								username = thisLine;
+								username = username.substring(username.lastIndexOf("=")+1, username.length()-9);
+								
+								numAI = Integer.parseInt(tokens[1].substring(tokens[1].indexOf("=")+1,tokens[1].indexOf("=")+2));
+								System.out.println(table+",username:"+username+",num ai :"+numAI);
+								model.rooms.put(table,0);
+								model.stays.put(table, "");
+								model.splits.put(table, "");
+								model.roomsPhase.put(table, 0);
+								model.roomAIs.put(table,numAI);
 								// Send the response
 								// Send the headers
 								out.println("HTTP/1.0 200 OK");
@@ -1096,11 +1022,46 @@ public class WebServer {
 								// this blank line signals the end of the headers
 								out.println("");
 								// Send the HTML page
-								out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?username="+user+"\" /></head><body><H1>Lobby</H1>");
+								out.println("<html><head><meta http-equiv=\"refresh\" content=\"0;url=/?username="+username+"\" /></head><body></body></html>");
+								
+
+
+								out.flush();
+								remote.close();
+								break;
+							}
+							//this will send the page that contains the list of tables and users available to play.
+							else if (thisLine.contains("GET /?username="))
+							{
+								System.out.println(thisLine);
+								String user = thisLine;
+								user = user.replace("GET /?username=", "");
+								String[] tokens = user.split(" ");
+								user = tokens[0];
+								Charset.forName("UTF-8").encode(user);
+								user = user.replaceAll("\\+", " ");
+								user = user.replaceAll("%20", " ");
+								user = user.replaceAll("%2B", " ");
+								user = user.replaceAll("[^\\p{L}\\p{Z}]","");
+								// Send the response
+								// Send the headers
+								out.println("HTTP/1.0 200 OK");
+								out.println("Content-Type: text/html");
+								out.println("Server: Bot");
+								// this blank line signals the end of the headers
+								out.println("");
+								// Send the HTML page
+								out.println("<html><head><meta http-equiv=\"refresh\" content=\"30;url=/?username="+user+"\" /></head><body><H1>Lobby</H1>");
 								String name = user;
 								if (name.contains("Second Hand"))
 									name.replace("Second Hand", "");
-								out.println("<H2>Welcome "+name+"</H2>");
+								out.println("<H2>Welcome "+name+"</H2>"
+										+ "<form action=createtable>"
+											+  "<input type=\"text\" name=\"tablename\" placeholder=\"Table Name\">"
+											+  "<input type=\"text\" name=\"numAI\" placeholder=\"Number of AI Players\">"
+											+  "<input type=\"hidden\" name=\"username\" value=\""+user+"\">"
+											+  "<input type=\"submit\" value=\"Create Table\" id=create>"
+											+ "</form>");
 								for (String room : model.rooms.keySet())
 								{
 									out.println("<center>"+room
