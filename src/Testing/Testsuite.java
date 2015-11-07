@@ -1,4 +1,5 @@
 package Testing;
+import SeleniumFeatures.*;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

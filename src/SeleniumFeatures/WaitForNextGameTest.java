@@ -1,4 +1,4 @@
-package Testing;
+package SeleniumFeatures;
 
 import java.util.concurrent.TimeUnit;
 import org.junit.*;

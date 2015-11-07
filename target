@@ -3,16 +3,127 @@
     "line": 1,
     "elements": [
       {
+        "before": [
+          {
+            "result": {
+              "duration": 24463439498,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Drivers.initialize()"
+            }
+          }
+        ],
         "line": 3,
-        "name": "Check login form is validated when there are no errors",
+        "name": "Check game form is validated when there are no errors",
         "description": "",
-        "id": "to-test-login-form-works-when-there-are-no-errors;check-login-form-is-validated-when-there-are-no-errors",
+        "id": "to-test-finishing-a-game-works-when-there-are-no-errors;check-game-form-is-validated-when-there-are-no-errors",
         "type": "scenario",
         "keyword": "Scenario",
         "steps": [
           {
             "result": {
-              "duration": 29434043831,
+              "duration": 742513080,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I am already logged in",
+            "match": {
+              "location": "StepDefinitions.I_have_logged_in()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 206585882,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I am already in a game",
+            "match": {
+              "location": "StepDefinitions.iAmInGame()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 785892934,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I click on the hit button",
+            "match": {
+              "location": "StepDefinitions.iHit()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 978686510,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I click on the stay button",
+            "match": {
+              "location": "StepDefinitions.iStay()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 756555870,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I should be on the end game page",
+            "match": {
+              "location": "StepDefinitions.endGamePage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "To test finishing a game works when there are no errors",
+    "description": "",
+    "id": "to-test-finishing-a-game-works-when-there-are-no-errors",
+    "keyword": "Feature",
+    "uri": "completeGame.feature"
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 128079,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Drivers.initialize()"
+            }
+          },
+          {
+            "result": {
+              "duration": 119099,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Drivers.initialize()"
+            }
+          }
+        ],
+        "line": 3,
+        "name": "Check login form is validated when there are no errors",
+        "description": "",
+        "id": "to-test-joining-a-game-works-when-there-are-no-errors;check-login-form-is-validated-when-there-are-no-errors",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 459106570,
               "status": "passed"
             },
             "line": 4,
@@ -24,7 +135,7 @@
           },
           {
             "result": {
-              "duration": 842076384,
+              "duration": 510534101,
               "status": "passed"
             },
             "line": 5,
@@ -36,7 +147,7 @@
           },
           {
             "result": {
-              "duration": 212412743,
+              "duration": 1220438208,
               "status": "passed"
             },
             "line": 6,
@@ -48,7 +159,7 @@
           },
           {
             "result": {
-              "duration": 2643902093,
+              "duration": 1402244918,
               "status": "passed"
             },
             "line": 7,
@@ -64,17 +175,17 @@
         "line": 9,
         "name": "Check if user joins room when there are no errors",
         "description": "",
-        "id": "to-test-login-form-works-when-there-are-no-errors;check-if-user-joins-room-when-there-are-no-errors",
+        "id": "to-test-joining-a-game-works-when-there-are-no-errors;check-if-user-joins-room-when-there-are-no-errors",
         "type": "scenario",
         "keyword": "Scenario",
         "steps": [
           {
             "result": {
-              "duration": 28665180610,
+              "duration": 99417272164,
               "status": "passed"
             },
             "line": 10,
-            "name": "I have already logged in",
+            "name": "I am already logged in",
             "match": {
               "location": "StepDefinitions.I_have_logged_in()"
             },
@@ -82,7 +193,7 @@
           },
           {
             "result": {
-              "duration": 2822098029,
+              "duration": 1406782016,
               "status": "passed"
             },
             "line": 11,
@@ -94,22 +205,22 @@
           },
           {
             "result": {
-              "duration": 58132,
+              "duration": 556089872,
               "status": "passed"
             },
             "line": 12,
             "name": "I should be on game room page",
             "match": {
-              "location": "StepDefinitions.I_should_be_on_game_room_page()"
+              "location": "StepDefinitions.inGameRoom()"
             },
             "keyword": "Then "
           }
         ]
       }
     ],
-    "name": "To test login form works when there are no errors",
+    "name": "To test joining a game works when there are no errors",
     "description": "",
-    "id": "to-test-login-form-works-when-there-are-no-errors",
+    "id": "to-test-joining-a-game-works-when-there-are-no-errors",
     "keyword": "Feature",
     "uri": "joinTable.feature"
   }

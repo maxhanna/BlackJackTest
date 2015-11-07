@@ -206,7 +206,7 @@ public class WebServer {
 									long diff = currDate.getTime() - model.personRestartTimes.get(user).getTime();
 
 									long diffMinutes = diff / (60 * 1000) % 60;
-									if (diffMinutes>3)
+									if (diffMinutes>2)
 									{
 										//remove all the user's data from that table
 										model.hands.remove(user+","+table);
@@ -252,8 +252,8 @@ public class WebServer {
 									long diffSeconds = diff / 1000 % 60;
 									if (diffSeconds<60)
 									{
-										int diffy = 60-(int)diffSeconds;
-										out.println("<center>There are "+ diffy + " seconds until table restarts for next round!</center>");	
+										int timeUntilGameEnds = 60-(int)diffSeconds;
+										out.println("<center>There are "+ timeUntilGameEnds + " seconds until table restarts for next round!</center>");	
 										//determine and display winner(s)
 										int dealerScore = model.calculatePoints(model.hands.get("Dealer,"+table));
 										if (dealerScore > 21)
@@ -426,7 +426,7 @@ public class WebServer {
 																	+ "<form>"
 																	+  "<input type=\"hidden\" name=\"userHit\" value=\""+theUserName+"\">"
 																	+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-																	+  "<input type=\"submit\" value=\"Hit\">"
+																	+  "<input type=\"submit\" value=\"Hit\" id=hitButton>"
 																	+ "</form>");
 														}
 														if (score > 20)
@@ -434,7 +434,7 @@ public class WebServer {
 															out.println("</td><td><center><form>"
 																	+  "<input type=\"hidden\" name=\"userStay\" value=\""+theUserName+"\">"
 																	+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-																	+  "<input id=\"theButton\" value=\"GLOW\" type=\"submit\">"
+																	+  "<input id=\"stayButton\" value=\"GLOW\" type=\"submit\">"
 																	+ "</form>");
 														}
 														else
@@ -442,7 +442,7 @@ public class WebServer {
 															out.println("</td><td><form>"
 																	+  "<input type=\"hidden\" name=\"userStay\" value=\""+theUserName+"\">"
 																	+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-																	+  "<input type=\"submit\" value=\"Stay\">"
+																	+  "<input type=\"submit\" value=\"Stay\" id=stayButton>"
 																	+ "</form>");
 
 														}
@@ -526,13 +526,13 @@ public class WebServer {
 																	+ "<form>"
 																	+  "<input type=\"hidden\" name=\"userHit\" value=\""+theUserName+"\">"
 																	+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-																	+  "<input type=\"submit\" value=\"Hit\">"
+																	+  "<input type=\"submit\" value=\"Hit\" id=hitButton>"
 																	+ "</form></td>");
 														}
 														out.println("<td><form>"
 																+  "<input type=\"hidden\" name=\"userStay\" value=\""+theUserName+"\">"
 																+  "<input type=\"hidden\" name=\"table\" value=\""+table+"\">"
-																+  "<input type=\"submit\" value=\"Stay\">"
+																+  "<input type=\"submit\" value=\"Stay\" id=stayButton>"
 																+ "</form></td></tr></table></center>");
 
 													}
@@ -986,7 +986,7 @@ public class WebServer {
 								// this blank line signals the end of the headers
 								out.println("");
 								// Send the HTML page
-								out.println("<html><head></head><body><H1>Welcome to the Black Jack Game</H1>");
+								out.println("<html><head><Title>Black Jack </Title><link rel=\"icon\" type=\"image/png\" href=\"http://www.topslotsite.com/wp-content/uploads/2014/08/Icon-Higher.png\"/></head><body><H1>Welcome to the Black Jack Game</H1>");
 								out.println("<H2><font color = red>Invalid Username Chosen</font></H2>");
 								out.println("<form>Username: <input type=\"text\""
 										+ " id=\"username\" name=\"username\"><br>"
@@ -1091,7 +1091,7 @@ public class WebServer {
 								// this blank line signals the end of the headers
 								out.println("");
 								// Send the HTML page
-								out.println("<html><head></head><body><H1>Welcome to the Black Jack Table</H1>");
+								out.println("<html><head><Title>Black Jack </Title><link rel=\"icon\" type=\"image/png\" href=\"http://www.topslotsite.com/wp-content/uploads/2014/08/Icon-Higher.png\"/></head><body><H1>Welcome to the Black Jack Table</H1>");
 								out.println("<H2>Enter A Username</H2>");
 								out.println("<form>Username: <input type=\"text\""
 										+ " id=\"username\" name=\"username\"><br>"
@@ -1113,10 +1113,10 @@ public class WebServer {
 	}
 	public String returnHtmlHeaders(String user,String table)
 	{
-		return "<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?join="+user+"&table="+table+"\" />"
+		return "<html><head><link rel=\"icon\" type=\"image/png\" href=\"http://www.topslotsite.com/wp-content/uploads/2014/08/Icon-Higher.png\"/><meta http-equiv=\"refresh\" content=\"3;url=/?join="+user+"&table="+table+"\" />"
 				+ "<script type=\"text/javascript\">"
 				+ "function makeMeGlow()"
-				+ "{  var myButton =document.getElementById('theButton');"
+				+ "{  var myButton =document.getElementById('stayButton');"
 				+ "myButton.style.background = \"black\";"
 				+ "myButton.style.color = \"white\";"
 				+ "myButton.value = \"Stay\"; "
@@ -1124,7 +1124,7 @@ public class WebServer {
 				+ "}"
 
 			+ "function nowImGlowing()"
-			+"{  var myButton1 =document.getElementById('theButton');"
+			+"{  var myButton1 =document.getElementById('stayButton');"
 
 			+"myButton1.style.background = \"gold\";"
 			+"myButton1.style.color = \"black\";"

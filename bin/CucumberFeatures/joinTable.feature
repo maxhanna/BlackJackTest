@@ -7,7 +7,7 @@ And I populate the username form
 Then I should be on join game room page
 
 Scenario: Check if user joins room when there are no errors
-Given I have already logged in
+Given I am already logged in
 When I click on the join table button
 Then I should be on game room page
 

@@ -10,8 +10,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class StepDefinitions {
-	WebDriver driver = new FirefoxDriver();
-	int counter = 0;
+	WebDriver driver = Drivers.getDriver();
 	@Given("^I am on my Blackjack website$")
 	public void navigateToSite() throws Throwable {
 		driver.navigate().to("localhost:8000");
@@ -25,7 +24,8 @@ public class StepDefinitions {
 	@When("^I populate the username form$")
 	public void populateUserNameForm() throws Throwable {
 
-		driver.findElement(By.id("username")).sendKeys("Max Hanna"+counter);
+		driver.findElement(By.id("username")).sendKeys("Max Hanna");
+
 	}
 
 	@Then("^I should be on join game room page$")
@@ -36,12 +36,9 @@ public class StepDefinitions {
 	}
 
 
-	@Given("^I have already logged in$")
+	@Given("^I am already logged in$")
 	public void I_have_logged_in() throws Throwable {
-		navigateToSite();
-		clickOnUserNameForm();
-		populateUserNameForm();
-		checkOnUserNameConfirmationPage();
+		driver.navigate().to("localhost:8000/&username=Max Hanna");
 	}
 
 	@When("^I click on the join table button$")
@@ -51,10 +48,29 @@ public class StepDefinitions {
 	}
 
 	@Then("^I should be on game room page$")
-	public void I_should_be_on_game_room_page() throws Throwable {
+	public void inGameRoom() throws Throwable {
 
-		assert(driver.findElement(By.xpath("//center[3]/table/tbody/tr[2]/td[2]")).getText().contains("X of X"));
+		driver.navigate().to("http://localhost:8000/?join=Max Hanna&table=Carleton%20Room");
 	}
 
 
+	@Given("^I am already in a game$")
+	public void iAmInGame() throws Throwable {
+		driver.navigate().to("http://localhost:8000/?join=Max Hanna&table=Carleton%20Room");
+	}
+
+	@When("^I click on the hit button$")
+	public void iHit() throws Throwable {
+		driver.findElement(By.id("hitButton")).click();	
+	}
+	
+	@When("^I click on the stay button$")
+	public void iStay() throws Throwable {
+		driver.findElement(By.id("stayButton")).click();	
+	}
+
+	@Then("^I should be on the end game page$")
+	public void endGamePage() throws Throwable {
+		driver.navigate().to("http://localhost:8000/?join=Max Hanna&table=Carleton%20Room");
+	}
 }
