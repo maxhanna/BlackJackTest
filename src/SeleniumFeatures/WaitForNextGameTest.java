@@ -64,7 +64,7 @@ public class WaitForNextGameTest extends TestCase {
 
 		}
 
-		bufferWritter.write("Finished WaitForNextGameTest \r\n");
+		bufferWritter.write("Finished WaitForNextGameTest Selenium Test\r\n");
 		bufferWritter.close();
 		driver.quit();
 		String verificationErrorString = verificationErrors.toString();

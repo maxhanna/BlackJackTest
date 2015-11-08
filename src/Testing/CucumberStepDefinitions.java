@@ -2,18 +2,24 @@ package Testing;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
-import Server.WebServer;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class CucumberStepDefinitions {
+	DesiredCapabilities desiredCapabilities;
+	LoggingPreferences logs;
+
 	WebDriver driver = CucumberWebDriver.getDriver();
+	
 	@Given("^I am on my Blackjack website$")
 	public void navigateToSite() throws Throwable {
 		driver.navigate().to("localhost:8000");
+
+		
 	}
 
 	@When("^I click on the username form$")

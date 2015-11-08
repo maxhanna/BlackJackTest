@@ -220,3 +220,29 @@
 [fxdriver.PatientListener] request status is 0
 [fxdriver.Utils] New page loading.
 [fxdriver.nsCommandProcessor] Received command: getLog
+[fxdriver.badCertListener] Found preference for webdriver_assume_untrusted_issuer: true
+[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true
+[fxdriver.WdCertOverrideService] Accept untrusted certificates: true
+[fxdriver.Utils] Loading: resource://fxdriver/evaluate.js
+[fxdriver.Utils] Done reading: resource://fxdriver/evaluate.js
+[fxdriver.ServerFactory] Driven by WebDriver version 2.48.0
+[fxdriver.nsCommandProcessor] Received command: newSession
+[fxdriver.wdSessionStoreService] Setting preferences based on required capabilities
+[fxdriver.nsCommandProcessor] Created a new session with id: d5f2fe87-a642-4834-9230-ccf89a45c0b1
+[fxdriver.nsCommandProcessor] Received command: setTimeout
+[fxdriver.DelayedCommand] Ignoring pending about:document-onload-blocker request
+[fxdriver.DelayedCommand] Ignoring pending about:document-onload-blocker request
+[fxdriver.nsCommandProcessor] Received command: get
+[fxdriver.wdSession] setWaitForPageLoad false
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.wdSession] setWaitForPageLoad true
+[fxdriver.PatientListener] request status is 0
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.nsCommandProcessor] Received command: getElementText
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.nsCommandProcessor] Received command: getElementText
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.nsCommandProcessor] Received command: isElementDisplayed
+[fxdriver.nsCommandProcessor] Received command: getLog

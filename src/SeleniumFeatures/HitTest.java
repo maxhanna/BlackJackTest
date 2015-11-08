@@ -64,6 +64,7 @@ public class HitTest extends TestCase{
 
 		}
 
+		bufferWritter.write("Finished HitTest Selenium Test \r\n");
 		bufferWritter.close();
 		driver.quit();
 		String verificationErrorString = verificationErrors.toString();

@@ -63,6 +63,7 @@ public class JoinGameTest extends TestCase{
 
 		}
 
+		bufferWritter.write("Finished JoinGameTest Selenium Test \r\n");
 		bufferWritter.close();
 		driver.quit();
 		String verificationErrorString = verificationErrors.toString();

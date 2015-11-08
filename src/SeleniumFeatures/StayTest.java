@@ -61,6 +61,7 @@ public class StayTest extends TestCase{
 
 		}
 
+		bufferWritter.write("Finished StayTest Selenium Test \r\n");
 		bufferWritter.close();
 		driver.quit();
 		String verificationErrorString = verificationErrors.toString();
