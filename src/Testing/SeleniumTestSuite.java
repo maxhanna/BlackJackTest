@@ -1,12 +1,4 @@
 package Testing;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import SeleniumFeatures.HitTest;
 import SeleniumFeatures.JoinGameTest;

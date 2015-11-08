@@ -6,7 +6,7 @@
         "before": [
           {
             "result": {
-              "duration": 22588803293,
+              "duration": 24848712835,
               "status": "passed"
             },
             "match": {
@@ -23,7 +23,7 @@
         "steps": [
           {
             "result": {
-              "duration": 665759562,
+              "duration": 836269844,
               "status": "passed"
             },
             "line": 4,
@@ -35,7 +35,7 @@
           },
           {
             "result": {
-              "duration": 294996432,
+              "duration": 126363847,
               "status": "passed"
             },
             "line": 5,
@@ -47,7 +47,7 @@
           },
           {
             "result": {
-              "duration": 933425178,
+              "duration": 4121350354,
               "status": "passed"
             },
             "line": 6,
@@ -59,7 +59,7 @@
           },
           {
             "result": {
-              "duration": 1299361971,
+              "duration": 235834094,
               "status": "passed"
             },
             "line": 7,
@@ -71,7 +71,7 @@
           },
           {
             "result": {
-              "duration": 653630860,
+              "duration": 3494098464,
               "status": "passed"
             },
             "line": 8,
@@ -97,7 +97,7 @@
         "before": [
           {
             "result": {
-              "duration": 127133,
+              "duration": 139894,
               "status": "passed"
             },
             "match": {
@@ -106,7 +106,7 @@
           },
           {
             "result": {
-              "duration": 110119,
+              "duration": 2515254,
               "status": "passed"
             },
             "match": {
@@ -123,7 +123,7 @@
         "steps": [
           {
             "result": {
-              "duration": 426153060,
+              "duration": 3359449688,
               "status": "passed"
             },
             "line": 4,
@@ -135,7 +135,7 @@
           },
           {
             "result": {
-              "duration": 360889271,
+              "duration": 280248501,
               "status": "passed"
             },
             "line": 5,
@@ -147,7 +147,7 @@
           },
           {
             "result": {
-              "duration": 1097950744,
+              "duration": 195282364,
               "status": "passed"
             },
             "line": 6,
@@ -159,8 +159,9 @@
           },
           {
             "result": {
-              "duration": 1548380114,
-              "status": "passed"
+              "duration": 208219237,
+              "error_message": "org.openqa.selenium.NoSuchElementException: Unable to locate element: {\"method\":\"id\",\"selector\":\"submit\"}\nCommand duration or timeout: 93 milliseconds\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00272.48.0\u0027, revision: \u0027b7b081a\u0027, time: \u00272015-10-07 15:45:39\u0027\nSystem info: host: \u0027Glitch\u0027, ip: \u0027192.168.2.13\u0027, os.name: \u0027Windows 8.1\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.3\u0027, java.version: \u00271.8.0_45\u0027\nDriver info: org.openqa.selenium.firefox.FirefoxDriver\nCapabilities [{applicationCacheEnabled\u003dtrue, rotatable\u003dfalse, handlesAlerts\u003dtrue, databaseEnabled\u003dtrue, version\u003d41.0.1, platform\u003dWINDOWS, nativeEvents\u003dfalse, acceptSslCerts\u003dtrue, webStorageEnabled\u003dtrue, locationContextEnabled\u003dtrue, browserName\u003dfirefox, takesScreenshot\u003dtrue, javascriptEnabled\u003dtrue, cssSelectorsEnabled\u003dtrue}]\nSession ID: b6ab19fc-e3bc-4da0-bc99-b61b24cdaf9b\n*** Element info: {Using\u003did, value\u003dsubmit}\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\r\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)\r\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)\r\n\tat java.lang.reflect.Constructor.newInstance(Unknown Source)\r\n\tat org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)\r\n\tat org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:647)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:353)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:403)\r\n\tat org.openqa.selenium.By$ById.findElement(By.java:218)\r\n\tat org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:345)\r\n\tat Testing.CucumberStepDefinitions.checkOnUserNameConfirmationPage(CucumberStepDefinitions.java:106)\r\n\tat ✽.Then I should be on join game room page(joinTable.feature:7)\r\nCaused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: {\"method\":\"id\",\"selector\":\"submit\"}\nFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00272.48.0\u0027, revision: \u0027b7b081a\u0027, time: \u00272015-10-07 15:45:39\u0027\nSystem info: host: \u0027Glitch\u0027, ip: \u0027192.168.2.13\u0027, os.name: \u0027Windows 8.1\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.3\u0027, java.version: \u00271.8.0_45\u0027\nDriver info: driver.version: unknown\r\n\tat \u003canonymous class\u003e.FirefoxDriver.prototype.findElementInternal_(file:///C:/Users/Max/AppData/Local/Temp/anonymous3636723050147891450webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10659)\r\n\tat \u003canonymous class\u003e.FirefoxDriver.prototype.findElement(file:///C:/Users/Max/AppData/Local/Temp/anonymous3636723050147891450webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10668)\r\n\tat \u003canonymous class\u003e.DelayedCommand.prototype.executeInternal_/h(file:///C:/Users/Max/AppData/Local/Temp/anonymous3636723050147891450webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12534)\r\n\tat \u003canonymous class\u003e.DelayedCommand.prototype.executeInternal_(file:///C:/Users/Max/AppData/Local/Temp/anonymous3636723050147891450webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12539)\r\n\tat \u003canonymous class\u003e.DelayedCommand.prototype.execute/\u003c(file:///C:/Users/Max/AppData/Local/Temp/anonymous3636723050147891450webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12481)\r\n",
+              "status": "failed"
             },
             "line": 7,
             "name": "I should be on join game room page",
@@ -181,7 +182,7 @@
         "steps": [
           {
             "result": {
-              "duration": 9139837137,
+              "duration": 2385444423,
               "status": "passed"
             },
             "line": 10,
@@ -193,7 +194,7 @@
           },
           {
             "result": {
-              "duration": 926156369,
+              "duration": 247881506,
               "status": "passed"
             },
             "line": 11,
@@ -205,7 +206,7 @@
           },
           {
             "result": {
-              "duration": 263922510,
+              "duration": 2020605041,
               "status": "passed"
             },
             "line": 12,

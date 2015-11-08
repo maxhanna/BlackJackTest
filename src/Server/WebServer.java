@@ -750,7 +750,7 @@ public class WebServer {
 											{
 												int aiPoints = model.calculatePoints(model.hands.get("AI"+aiCount+","+table));
 												String aiHand = model.hands.get("AI"+aiCount+","+table);
-												while (aiPoints<17)
+												while (aiPoints<18 && !(aiPoints>21))
 												{
 													aiHand = aiHand + ","+model.hit(model.deck);
 													aiPoints = model.calculatePoints(aiHand);

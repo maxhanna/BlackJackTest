@@ -247,3 +247,52 @@
 [fxdriver.nsCommandProcessor] Received command: isElementDisplayed
 [fxdriver.nsCommandProcessor] Received command: getLog
 Finished navigateToSite() with no errors 
+Finished I_have_logged_in() with no errors 
+Finished iAmInGame() with no errors 
+Finished navigateToSite() with no errors 
+Finished clickOnUserNameForm() with no errors 
+Finished populateUserNameForm() with no errors 
+Finished checkOnUserNameConfirmationPage() with no errors 
+Finished I_have_logged_in() with no errors 
+Finished I_click_on_the_join_table_button() with no errors 
+Finished inGameRoom() with no errors 
+Finished I_have_logged_in() with no errors 
+Finished iAmInGame() with no errors 
+Finished iHit() errors 
+Finished iHit() with no errors 
+Finished navigateToSite() with no errors 
+Finished I_have_logged_in() with no errors 
+Finished I_have_logged_in() with no errors 
+Finished iAmInGame() with no errors 
+Finished iHit() errors 
+Finished iHit() with no errors 
+Finished iStay() errors 
+Finished iStay() with no errors 
+Finished endGamePage() with no errors 
+Finished navigateToSite() with no errors 
+Finished clickOnUserNameForm() errors 
+Finished clickOnUserNameForm() with no errors 
+Finished populateUserNameForm() errors 
+Finished populateUserNameForm() with no errors 
+Finished checkOnUserNameConfirmationPage() errors 
+Finished I_have_logged_in() with no errors 
+Finished I_click_on_the_join_table_button() errors 
+Finished I_click_on_the_join_table_button() with no errors 
+Finished inGameRoom() with no errors 
+Finished I_have_logged_in()
+Finished iAmInGame()
+Errors detected in iHit() 
+Finished iHit()
+Errors detected in iStay() 
+Finished iStay()
+Finished endGamePage()
+Finished navigateToSite()
+Errors detected in clickOnUserNameForm() 
+Finished clickOnUserNameForm()
+Errors detected in populateUserNameForm() 
+Finished populateUserNameForm()
+Errors detected in checkOnUserNameConfirmationPage() 
+Finished I_have_logged_in()
+Errors detected in I_click_on_the_join_table_button() 
+Finished I_click_on_the_join_table_button()
+Finished inGameRoom()
