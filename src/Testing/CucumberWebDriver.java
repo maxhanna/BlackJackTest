@@ -5,7 +5,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import cucumber.api.java.Before;
 
-public class Drivers {
+public class CucumberWebDriver {
     private static boolean initialized = false;
     private static WebDriver driver;
 

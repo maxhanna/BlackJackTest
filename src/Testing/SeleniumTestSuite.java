@@ -3,7 +3,7 @@ import SeleniumFeatures.*;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public class Testsuite {
+public class SeleniumTestSuite {
 
 
 	public static Test suite() {

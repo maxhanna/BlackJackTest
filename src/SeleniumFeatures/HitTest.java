@@ -22,7 +22,7 @@ public class HitTest extends TestCase{
     driver.get(baseUrl);
 
 	assertTrue(driver.findElement(By.xpath("//center[3]/table/tbody/tr[2]/td[2]")).getText().contains("X of X"));
-    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
+    driver.findElement(By.cssSelector("input[id=\"hitButton\"]")).click();
   }
 
   @After

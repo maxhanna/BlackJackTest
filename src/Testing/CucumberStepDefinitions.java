@@ -9,8 +9,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class StepDefinitions {
-	WebDriver driver = Drivers.getDriver();
+public class CucumberStepDefinitions {
+	WebDriver driver = CucumberWebDriver.getDriver();
 	@Given("^I am on my Blackjack website$")
 	public void navigateToSite() throws Throwable {
 		driver.navigate().to("localhost:8000");
