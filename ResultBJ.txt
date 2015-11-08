@@ -1,0 +1,222 @@
+[fxdriver.badCertListener] Found preference for webdriver_assume_untrusted_issuer: true
+[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true
+[fxdriver.WdCertOverrideService] Accept untrusted certificates: true
+[fxdriver.Utils] Loading: resource://fxdriver/evaluate.js
+[fxdriver.Utils] Done reading: resource://fxdriver/evaluate.js
+[fxdriver.ServerFactory] Driven by WebDriver version 2.48.0
+[fxdriver.nsCommandProcessor] Received command: newSession
+[fxdriver.wdSessionStoreService] Setting preferences based on required capabilities
+[fxdriver.nsCommandProcessor] Created a new session with id: 76044b5d-ac6e-4039-a830-4e24e569fa7e
+[fxdriver.nsCommandProcessor] Received command: setTimeout
+[fxdriver.nsCommandProcessor] Received command: get
+[fxdriver.wdSession] setWaitForPageLoad false
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.wdSession] setWaitForPageLoad true
+[fxdriver.PatientListener] request status is 0
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.nsCommandProcessor] Received command: clearElement
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.nsCommandProcessor] Received command: sendKeysToElement
+[fxdriver.WebElement] No need to switch focus
+[fxdriver.Utils] Doing sendKeys...
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.nsCommandProcessor] Received command: clickElement
+[fxdriver.SyntheticMouse] SyntheticMouse.move [object HTMLInputElement] 32 12
+[fxdriver.SyntheticMouse] Calling mouse.move with: 32, 12, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseout 40, 152.35000610351562, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseover 40, 152.35000610351562, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 40, 152.35000610351562, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] SyntheticMouse.click [object HTMLInputElement]
+[fxdriver.SyntheticMouse] About to do a bot.action.click on [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 40, 152.35000610351562, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousedown 40, 152.35000610351562, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseup 40, 152.35000610351562, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent click 40, 152.35000610351562, [object HTMLInputElement]
+[fxdriver.PatientListener] request status is 0
+[fxdriver.Utils] New page loading.
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.nsCommandProcessor] Received command: clickElement
+[fxdriver.SyntheticMouse] SyntheticMouse.move [object HTMLInputElement] 23 12
+[fxdriver.SyntheticMouse] Calling mouse.move with: 23, 12, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseover 506, 210.35000610351562, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 506, 210.35000610351562, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] SyntheticMouse.click [object HTMLInputElement]
+[fxdriver.SyntheticMouse] About to do a bot.action.click on [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 506, 210.35000610351562, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousedown 506, 210.35000610351562, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseup 506, 210.35000610351562, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent click 506, 210.35000610351562, [object HTMLInputElement]
+[fxdriver.PatientListener] request status is 0
+[fxdriver.Utils] New page loading.
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.nsCommandProcessor] Received command: getElementText
+[fxdriver.nsCommandProcessor] Received command: getLog
+[fxdriver.badCertListener] Found preference for webdriver_assume_untrusted_issuer: true
+[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true
+[fxdriver.WdCertOverrideService] Accept untrusted certificates: true
+[fxdriver.Utils] Loading: resource://fxdriver/evaluate.js
+[fxdriver.Utils] Done reading: resource://fxdriver/evaluate.js
+[fxdriver.ServerFactory] Driven by WebDriver version 2.48.0
+[fxdriver.nsCommandProcessor] Received command: newSession
+[fxdriver.wdSessionStoreService] Setting preferences based on required capabilities
+[fxdriver.nsCommandProcessor] Created a new session with id: 995dcdaf-a0bc-4d3a-9ea1-67d058dd9930
+[fxdriver.nsCommandProcessor] Received command: setTimeout
+[fxdriver.DelayedCommand] Ignoring pending about:document-onload-blocker request
+[fxdriver.nsCommandProcessor] Received command: get
+[fxdriver.wdSession] setWaitForPageLoad false
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.wdSession] setWaitForPageLoad true
+[fxdriver.PatientListener] request status is 0
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.nsCommandProcessor] Received command: getElementText
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.nsCommandProcessor] Received command: clickElement
+[fxdriver.SyntheticMouse] SyntheticMouse.move [object HTMLInputElement] 19 12
+[fxdriver.SyntheticMouse] Calling mouse.move with: 19, 12, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseout 470.5, 298.7833251953125, [object HTMLBodyElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseover 470.5, 298.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 470.5, 298.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] SyntheticMouse.click [object HTMLInputElement]
+[fxdriver.SyntheticMouse] About to do a bot.action.click on [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 470.5, 298.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousedown 470.5, 298.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseup 470.5, 298.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent click 470.5, 298.7833251953125, [object HTMLInputElement]
+[fxdriver.PatientListener] request status is 0
+[fxdriver.Utils] New page loading.
+[fxdriver.nsCommandProcessor] Received command: getLog
+[fxdriver.badCertListener] Found preference for webdriver_assume_untrusted_issuer: true
+[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true
+[fxdriver.WdCertOverrideService] Accept untrusted certificates: true
+[fxdriver.Utils] Loading: resource://fxdriver/evaluate.js
+[fxdriver.Utils] Done reading: resource://fxdriver/evaluate.js
+[fxdriver.ServerFactory] Driven by WebDriver version 2.48.0
+[fxdriver.nsCommandProcessor] Received command: newSession
+[fxdriver.wdSessionStoreService] Setting preferences based on required capabilities
+[fxdriver.nsCommandProcessor] Created a new session with id: 15308896-77d5-4596-8ef2-abf6ff84f2a0
+[fxdriver.nsCommandProcessor] Received command: setTimeout
+[fxdriver.DelayedCommand] Ignoring pending about:document-onload-blocker request
+[fxdriver.nsCommandProcessor] Received command: get
+[fxdriver.wdSession] setWaitForPageLoad false
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.wdSession] setWaitForPageLoad true
+[fxdriver.PatientListener] request status is 0
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.nsCommandProcessor] Received command: getElementText
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.nsCommandProcessor] Received command: clickElement
+[fxdriver.SyntheticMouse] SyntheticMouse.move [object HTMLInputElement] 24 12
+[fxdriver.SyntheticMouse] Calling mouse.move with: 24, 12, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseout 497, 359.7833251953125, [object HTMLBodyElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseover 497, 359.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 497, 359.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] SyntheticMouse.click [object HTMLInputElement]
+[fxdriver.SyntheticMouse] About to do a bot.action.click on [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 497, 359.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousedown 497, 359.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseup 497, 359.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent click 497, 359.7833251953125, [object HTMLInputElement]
+[fxdriver.PatientListener] request status is 0
+[fxdriver.Utils] New page loading.
+[fxdriver.nsCommandProcessor] Received command: getLog
+[fxdriver.badCertListener] Found preference for webdriver_assume_untrusted_issuer: true
+[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true
+[fxdriver.WdCertOverrideService] Accept untrusted certificates: true
+[fxdriver.Utils] Loading: resource://fxdriver/evaluate.js
+[fxdriver.Utils] Done reading: resource://fxdriver/evaluate.js
+[fxdriver.ServerFactory] Driven by WebDriver version 2.48.0
+[fxdriver.nsCommandProcessor] Received command: newSession
+[fxdriver.wdSessionStoreService] Setting preferences based on required capabilities
+[fxdriver.nsCommandProcessor] Created a new session with id: f776365f-9a13-4b3b-8961-59b2b4d7f7ad
+[fxdriver.nsCommandProcessor] Received command: setTimeout
+[fxdriver.DelayedCommand] Ignoring pending about:document-onload-blocker request
+[fxdriver.nsCommandProcessor] Received command: get
+[fxdriver.wdSession] setWaitForPageLoad false
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.wdSession] setWaitForPageLoad true
+[fxdriver.PatientListener] request status is 0
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.nsCommandProcessor] Received command: getElementText
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.nsCommandProcessor] Received command: getElementText
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.nsCommandProcessor] Received command: isElementDisplayed
+[fxdriver.nsCommandProcessor] Received command: getLog
+[fxdriver.badCertListener] Found preference for webdriver_assume_untrusted_issuer: true
+[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true
+[fxdriver.WdCertOverrideService] Accept untrusted certificates: true
+[fxdriver.Utils] Loading: resource://fxdriver/evaluate.js
+[fxdriver.Utils] Done reading: resource://fxdriver/evaluate.js
+[fxdriver.ServerFactory] Driven by WebDriver version 2.48.0
+[fxdriver.nsCommandProcessor] Received command: newSession
+[fxdriver.wdSessionStoreService] Setting preferences based on required capabilities
+[fxdriver.nsCommandProcessor] Created a new session with id: f740938e-639d-4e4f-a4f7-1a0bf540f22e
+[fxdriver.nsCommandProcessor] Received command: setTimeout
+[fxdriver.DelayedCommand] Ignoring pending about:document-onload-blocker request
+[fxdriver.DelayedCommand] Ignoring pending about:document-onload-blocker request
+[fxdriver.nsCommandProcessor] Received command: get
+[fxdriver.wdSession] setWaitForPageLoad false
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.wdSession] setWaitForPageLoad true
+[fxdriver.PatientListener] request status is 0
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.nsCommandProcessor] Received command: getElementText
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.nsCommandProcessor] Received command: clickElement
+[fxdriver.SyntheticMouse] SyntheticMouse.move [object HTMLInputElement] 19 12
+[fxdriver.SyntheticMouse] Calling mouse.move with: 19, 12, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseout 470.5, 298.7833251953125, [object HTMLBodyElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseover 470.5, 298.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 470.5, 298.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] SyntheticMouse.click [object HTMLInputElement]
+[fxdriver.SyntheticMouse] About to do a bot.action.click on [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 470.5, 298.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousedown 470.5, 298.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseup 470.5, 298.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent click 470.5, 298.7833251953125, [object HTMLInputElement]
+[fxdriver.PatientListener] request status is 0
+[fxdriver.Utils] New page loading.
+[fxdriver.nsCommandProcessor] Received command: getLog
+[fxdriver.badCertListener] Found preference for webdriver_assume_untrusted_issuer: true
+[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true
+[fxdriver.WdCertOverrideService] Accept untrusted certificates: true
+[fxdriver.Utils] Loading: resource://fxdriver/evaluate.js
+[fxdriver.Utils] Done reading: resource://fxdriver/evaluate.js
+[fxdriver.ServerFactory] Driven by WebDriver version 2.48.0
+[fxdriver.nsCommandProcessor] Received command: newSession
+[fxdriver.wdSessionStoreService] Setting preferences based on required capabilities
+[fxdriver.nsCommandProcessor] Created a new session with id: fc4872a0-8bf5-48b2-aff8-0ff76bdc67a2
+[fxdriver.nsCommandProcessor] Received command: setTimeout
+[fxdriver.DelayedCommand] Ignoring pending about:document-onload-blocker request
+[fxdriver.nsCommandProcessor] Received command: get
+[fxdriver.wdSession] setWaitForPageLoad false
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.wdSession] setWaitForPageLoad true
+[fxdriver.PatientListener] request status is 0
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.wdSession] Lost DOM in window undefined
+[fxdriver.nsCommandProcessor] Received command: getElementText
+[fxdriver.nsCommandProcessor] Received command: findElement
+[fxdriver.nsCommandProcessor] Received command: clickElement
+[fxdriver.SyntheticMouse] SyntheticMouse.move [object HTMLInputElement] 24 12
+[fxdriver.SyntheticMouse] Calling mouse.move with: 24, 12, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseout 497, 359.7833251953125, [object HTMLBodyElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseover 497, 359.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 497, 359.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] SyntheticMouse.click [object HTMLInputElement]
+[fxdriver.SyntheticMouse] About to do a bot.action.click on [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 497, 359.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mousedown 497, 359.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseup 497, 359.7833251953125, [object HTMLInputElement]
+[fxdriver.SyntheticMouse] Calling fireMouseEvent click 497, 359.7833251953125, [object HTMLInputElement]
+[fxdriver.PatientListener] request status is 0
+[fxdriver.Utils] New page loading.
+[fxdriver.nsCommandProcessor] Received command: getLog
