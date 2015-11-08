@@ -6,11 +6,11 @@
         "before": [
           {
             "result": {
-              "duration": 24463439498,
+              "duration": 22588803293,
               "status": "passed"
             },
             "match": {
-              "location": "Drivers.initialize()"
+              "location": "CucumberWebDriver.initialize()"
             }
           }
         ],
@@ -23,61 +23,61 @@
         "steps": [
           {
             "result": {
-              "duration": 742513080,
+              "duration": 665759562,
               "status": "passed"
             },
             "line": 4,
             "name": "I am already logged in",
             "match": {
-              "location": "StepDefinitions.I_have_logged_in()"
+              "location": "CucumberStepDefinitions.I_have_logged_in()"
             },
             "keyword": "Given "
           },
           {
             "result": {
-              "duration": 206585882,
+              "duration": 294996432,
               "status": "passed"
             },
             "line": 5,
             "name": "I am already in a game",
             "match": {
-              "location": "StepDefinitions.iAmInGame()"
+              "location": "CucumberStepDefinitions.iAmInGame()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 785892934,
+              "duration": 933425178,
               "status": "passed"
             },
             "line": 6,
             "name": "I click on the hit button",
             "match": {
-              "location": "StepDefinitions.iHit()"
+              "location": "CucumberStepDefinitions.iHit()"
             },
             "keyword": "When "
           },
           {
             "result": {
-              "duration": 978686510,
+              "duration": 1299361971,
               "status": "passed"
             },
             "line": 7,
             "name": "I click on the stay button",
             "match": {
-              "location": "StepDefinitions.iStay()"
+              "location": "CucumberStepDefinitions.iStay()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 756555870,
+              "duration": 653630860,
               "status": "passed"
             },
             "line": 8,
             "name": "I should be on the end game page",
             "match": {
-              "location": "StepDefinitions.endGamePage()"
+              "location": "CucumberStepDefinitions.endGamePage()"
             },
             "keyword": "Then "
           }
@@ -97,20 +97,20 @@
         "before": [
           {
             "result": {
-              "duration": 128079,
+              "duration": 127133,
               "status": "passed"
             },
             "match": {
-              "location": "Drivers.initialize()"
+              "location": "CucumberWebDriver.initialize()"
             }
           },
           {
             "result": {
-              "duration": 119099,
+              "duration": 110119,
               "status": "passed"
             },
             "match": {
-              "location": "Drivers.initialize()"
+              "location": "CucumberWebDriver.initialize()"
             }
           }
         ],
@@ -123,49 +123,49 @@
         "steps": [
           {
             "result": {
-              "duration": 459106570,
+              "duration": 426153060,
               "status": "passed"
             },
             "line": 4,
             "name": "I am on my Blackjack website",
             "match": {
-              "location": "StepDefinitions.navigateToSite()"
+              "location": "CucumberStepDefinitions.navigateToSite()"
             },
             "keyword": "Given "
           },
           {
             "result": {
-              "duration": 510534101,
+              "duration": 360889271,
               "status": "passed"
             },
             "line": 5,
             "name": "I click on the username form",
             "match": {
-              "location": "StepDefinitions.clickOnUserNameForm()"
+              "location": "CucumberStepDefinitions.clickOnUserNameForm()"
             },
             "keyword": "When "
           },
           {
             "result": {
-              "duration": 1220438208,
+              "duration": 1097950744,
               "status": "passed"
             },
             "line": 6,
             "name": "I populate the username form",
             "match": {
-              "location": "StepDefinitions.populateUserNameForm()"
+              "location": "CucumberStepDefinitions.populateUserNameForm()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 1402244918,
+              "duration": 1548380114,
               "status": "passed"
             },
             "line": 7,
             "name": "I should be on join game room page",
             "match": {
-              "location": "StepDefinitions.checkOnUserNameConfirmationPage()"
+              "location": "CucumberStepDefinitions.checkOnUserNameConfirmationPage()"
             },
             "keyword": "Then "
           }
@@ -181,37 +181,37 @@
         "steps": [
           {
             "result": {
-              "duration": 99417272164,
+              "duration": 9139837137,
               "status": "passed"
             },
             "line": 10,
             "name": "I am already logged in",
             "match": {
-              "location": "StepDefinitions.I_have_logged_in()"
+              "location": "CucumberStepDefinitions.I_have_logged_in()"
             },
             "keyword": "Given "
           },
           {
             "result": {
-              "duration": 1406782016,
+              "duration": 926156369,
               "status": "passed"
             },
             "line": 11,
             "name": "I click on the join table button",
             "match": {
-              "location": "StepDefinitions.I_click_on_the_join_table_button()"
+              "location": "CucumberStepDefinitions.I_click_on_the_join_table_button()"
             },
             "keyword": "When "
           },
           {
             "result": {
-              "duration": 556089872,
+              "duration": 263922510,
               "status": "passed"
             },
             "line": 12,
             "name": "I should be on game room page",
             "match": {
-              "location": "StepDefinitions.inGameRoom()"
+              "location": "CucumberStepDefinitions.inGameRoom()"
             },
             "keyword": "Then "
           }

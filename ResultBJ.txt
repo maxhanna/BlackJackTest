@@ -246,3 +246,4 @@
 [fxdriver.wdSession] Lost DOM in window undefined
 [fxdriver.nsCommandProcessor] Received command: isElementDisplayed
 [fxdriver.nsCommandProcessor] Received command: getLog
+Finished navigateToSite() with no errors 
