@@ -82,7 +82,7 @@ public class CucumberStepDefinitions {
 	public void navigateToSite() throws Throwable {
 		try {
 			driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-			driver.navigate().to("localhost:8000");
+			driver.navigate().to("http://localhost:8000");
 		}
 		catch (TimeoutException e)
 		{
@@ -164,7 +164,7 @@ public class CucumberStepDefinitions {
 	public void loggedIn() throws Throwable {
 		try {
 			driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-			driver.navigate().to("localhost:8000/&username=Max Hanna");
+			driver.navigate().to("http://localhost:8000/&username=Max%20Hanna");
 		}
 		catch (TimeoutException e)
 		{
@@ -203,7 +203,7 @@ public class CucumberStepDefinitions {
 	public void inGameRoom() throws Throwable {
 		try {
 			driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-			driver.navigate().to("http://localhost:8000/?join=Max Hanna&table=Carleton%20Room");
+			driver.navigate().to("http://localhost:8000/?join=Max%20Hanna&table=Carleton%20Room");
 		}
 		catch (TimeoutException e)
 		{
@@ -223,7 +223,7 @@ public class CucumberStepDefinitions {
 	public void iAmInGame() throws Throwable {
 		try {
 			driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-			driver.navigate().to("http://localhost:8000/?join=Max Hanna&table=Carleton%20Room");
+			driver.navigate().to("http://localhost:8000/?join=Max%20Hanna&table=Carleton%20Room");
 		}
 		catch (TimeoutException e)
 		{
@@ -282,7 +282,7 @@ public class CucumberStepDefinitions {
 	public void endGamePage() throws Throwable {
 		try {
 			driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-			driver.navigate().to("http://localhost:8000/?join=Max Hanna&table=Carleton%20Room");
+			driver.navigate().to("http://localhost:8000/?join=Max%20Hanna&table=Carleton%20Room");
 		}
 		catch (TimeoutException e)
 		{
@@ -302,7 +302,9 @@ public class CucumberStepDefinitions {
 			driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 			if (driver.findElement(By.id("tableName")).isDisplayed() && driver.findElement(By.id("numAI")).isDisplayed())
 			{	
+				driver.findElement(By.id("tableName")).click();
 				driver.findElement(By.id("tableName")).sendKeys("Hungry");
+				driver.findElement(By.id("numAI")).click();
 				driver.findElement(By.id("numAI")).sendKeys("3");
 			}
 		}

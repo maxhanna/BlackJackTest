@@ -222,7 +222,7 @@ public class WebServer {
 										// this blank line signals the end of the headers
 										out.println("");
 										// Send the HTML page
-										out.println("<html><head><meta http-equiv=\"refresh\" content=\"3;url=/?username="+user+"\" /></head><body></body></html>");
+										out.println("<html><head><meta http-equiv=\"refresh\" content=\"4;url=/?username="+user+"\" /></head><body></body></html>");
 										out.flush();
 										remote.close();
 										break;
@@ -1113,7 +1113,7 @@ public class WebServer {
 	}
 	public String returnHtmlHeaders(String user,String table)
 	{
-		return "<html><head><link rel=\"icon\" type=\"image/png\" href=\"http://www.topslotsite.com/wp-content/uploads/2014/08/Icon-Higher.png\"/><meta http-equiv=\"refresh\" content=\"3;url=/?join="+user+"&table="+table+"\" />"
+		return "<html><head><link rel=\"icon\" type=\"image/png\" href=\"http://www.topslotsite.com/wp-content/uploads/2014/08/Icon-Higher.png\"/><meta http-equiv=\"refresh\" content=\"4;url=/?join="+user+"&table="+table+"\" />"
 				+ "<script type=\"text/javascript\">"
 				+ "function makeMeGlow()"
 				+ "{  var myButton =document.getElementById('stayButton');"
