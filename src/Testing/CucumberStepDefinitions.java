@@ -3,6 +3,7 @@ package Testing;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +23,8 @@ public class CucumberStepDefinitions {
 
 
 		try {
+
+			TimeUnit.SECONDS.sleep(3);
 			FileWriter fileWritter;
 			BufferedWriter bufferWritter;
 			fileWritter = new FileWriter(file.getName(),true);
@@ -97,7 +100,7 @@ public class CucumberStepDefinitions {
 	@Then("^I should be on join game room page$")
 	public void checkOnUserNameConfirmationPage() throws Throwable {
 		try {
-		driver.findElement(By.id("submit")).click();
+			driver.findElement(By.id("submit")).click();
 		}
 		catch(Exception E) {
 			logFailed("checkOnUserNameConfirmationPage");
@@ -112,7 +115,7 @@ public class CucumberStepDefinitions {
 	@Given("^I am already logged in$")
 	public void I_have_logged_in() throws Throwable {
 		try {
-		driver.navigate().to("localhost:8000/&username=Max Hanna");
+			driver.navigate().to("localhost:8000/&username=Max Hanna");
 		}
 		catch (Exception e)
 		{
@@ -124,26 +127,26 @@ public class CucumberStepDefinitions {
 
 	@When("^I click on the join table button$")
 	public void I_click_on_the_join_table_button() throws Throwable {
-try {
-		driver.findElement(By.id("submit")).click();	
-}
-catch (Exception e)
-{
-	logFailed("I_click_on_the_join_table_button");
-}
+		try {
+			driver.findElement(By.id("submit")).click();	
+		}
+		catch (Exception e)
+		{
+			logFailed("I_click_on_the_join_table_button");
+		}
 		//LOG PROGRESS
 		log("I_click_on_the_join_table_button");
 	}
 
 	@Then("^I should be on game room page$")
 	public void inGameRoom() throws Throwable {
-try {
-		driver.navigate().to("http://localhost:8000/?join=Max Hanna&table=Carleton%20Room");
-}
-catch(Exception e)
-{
-	logFailed("inGameRoom");
-}
+		try {
+			driver.navigate().to("http://localhost:8000/?join=Max Hanna&table=Carleton%20Room");
+		}
+		catch(Exception e)
+		{
+			logFailed("inGameRoom");
+		}
 		//LOG PROGRESS
 		log("inGameRoom");
 	}
@@ -152,7 +155,7 @@ catch(Exception e)
 	@Given("^I am already in a game$")
 	public void iAmInGame() throws Throwable {
 		try {
-		driver.navigate().to("http://localhost:8000/?join=Max Hanna&table=Carleton%20Room");
+			driver.navigate().to("http://localhost:8000/?join=Max Hanna&table=Carleton%20Room");
 		}
 		catch(Exception e)
 		{
@@ -178,7 +181,7 @@ catch(Exception e)
 	@When("^I click on the stay button$")
 	public void iStay() throws Throwable {
 		try {
-		driver.findElement(By.id("stayButton")).click();	
+			driver.findElement(By.id("stayButton")).click();	
 		}
 		catch (Exception e)
 		{
@@ -191,7 +194,7 @@ catch(Exception e)
 	@Then("^I should be on the end game page$")
 	public void endGamePage() throws Throwable {
 		try {
-		driver.navigate().to("http://localhost:8000/?join=Max Hanna&table=Carleton%20Room");
+			driver.navigate().to("http://localhost:8000/?join=Max Hanna&table=Carleton%20Room");
 		}
 		catch (Exception e)
 		{
@@ -200,4 +203,57 @@ catch(Exception e)
 		//LOG PROGRESS
 		log("endGamePage");
 	}
+	@Given("^I populate the create table form$")
+	public void populateCreateTableForm() throws Throwable {
+		try{
+
+			driver.findElement(By.id("tableName")).sendKeys("Hungry");
+			driver.findElement(By.id("numAI")).sendKeys("3");
+		}
+		catch (Exception E)
+		{
+			logFailed("populateCreateTableForm");
+		}
+		//LOG PROGRESS
+		log("populateCreateTableForm");
+	}
+
+	@Given("^I click on the create table forms submit button$")
+	public void submitCreateTable() throws Throwable {
+		try{
+			driver.findElement(By.id("create")).click();	
+		}
+		catch (Exception E)
+		{
+			logFailed("submitCreateTable");
+		}
+		//LOG PROGRESS
+		log("submitCreateTable");
+	}
+	@When("^I click on the new join table button$")
+	public void joinNewTable() throws Throwable {
+		try {
+			driver.findElement(By.id("submit")).click();
+		}
+		catch (Exception e)
+		{
+			logFailed("joinNewTable");
+		}
+		//LOG PROGRESS
+		log("joinNewTable");
+	}
+
+	@Then("^I should be on new game room page$")
+	public void onNewGameRoomPage() throws Throwable {
+		try {
+			driver.navigate().to("http://localhost:8000/?username=Max Hanna&table=Hungry");
+		}
+		catch (Exception e)
+		{
+			logFailed("onNewGameRoomPage");
+		}
+		//LOG PROGRESS
+		log("onNewGameRoomPage");
+	}
+
 }

@@ -236,7 +236,7 @@ public class WebServer {
 								// this blank line signals the end of the headers
 								out.println("");
 								// Send the HTML page
-								out.println(returnHtmlHeaders(user,table)+"<H1>"+table+"</H1>");
+								out.println(returnHtmlHeaders(user,table)+"<body><H1>"+table+"</H1>");
 								String name = user;
 								if (name.contains("Second Hand"))
 									name.replace("Second Hand", "");
@@ -1057,8 +1057,8 @@ public class WebServer {
 									name.replace("Second Hand", "");
 								out.println("<H2>Welcome "+name+"</H2>"
 										+ "<form action=createtable>"
-											+  "<input type=\"text\" name=\"tablename\" placeholder=\"Table Name\">"
-											+  "<input type=\"text\" name=\"numAI\" placeholder=\"Number of AI Players\">"
+											+  "<input type=\"text\" id=\"tableName\" name=\"tablename\" placeholder=\"Table Name\">"
+											+  "<input type=\"text\" id=\"numAI\" name=\"numAI\" placeholder=\"Number of AI Players\">"
 											+  "<input type=\"hidden\" name=\"username\" value=\""+user+"\">"
 											+  "<input type=\"submit\" value=\"Create Table\" id=create>"
 											+ "</form>");
