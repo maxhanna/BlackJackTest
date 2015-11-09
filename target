@@ -1,0 +1,318 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 24249822061,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberWebDriver.initialize()"
+            }
+          }
+        ],
+        "line": 3,
+        "name": "Check game form is validated when there are no errors",
+        "description": "",
+        "id": "to-test-finishing-a-game-works-when-there-are-no-errors;check-game-form-is-validated-when-there-are-no-errors",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 18907994744,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I am already logged in",
+            "match": {
+              "location": "CucumberStepDefinitions.loggedIn()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 3388641659,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I am already in a game",
+            "match": {
+              "location": "CucumberStepDefinitions.iAmInGame()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 4227261814,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I click on the hit button",
+            "match": {
+              "location": "CucumberStepDefinitions.iHit()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 4006399198,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I click on the stay button",
+            "match": {
+              "location": "CucumberStepDefinitions.iStay()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 4501471249,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I should be on the end game page",
+            "match": {
+              "location": "CucumberStepDefinitions.endGamePage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "To test finishing a game works when there are no errors",
+    "description": "",
+    "id": "to-test-finishing-a-game-works-when-there-are-no-errors",
+    "keyword": "Feature",
+    "uri": "completeGame.feature"
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 244342,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberWebDriver.initialize()"
+            }
+          }
+        ],
+        "line": 3,
+        "name": "Check if user joins new room when there are no errors",
+        "description": "",
+        "id": "to-test-creating-a-table-works-when-there-are-no-errors;check-if-user-joins-new-room-when-there-are-no-errors",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 13638210399,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I am already logged in",
+            "match": {
+              "location": "CucumberStepDefinitions.loggedIn()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 3324058907,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I populate the create table form",
+            "match": {
+              "location": "CucumberStepDefinitions.populateCreateTableForm()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3279756509,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I click on the create table forms submit button",
+            "match": {
+              "location": "CucumberStepDefinitions.submitCreateTable()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3283767114,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I click on the new join table button",
+            "match": {
+              "location": "CucumberStepDefinitions.joinNewTable()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3593260992,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I should be on new game room page",
+            "match": {
+              "location": "CucumberStepDefinitions.onNewGameRoomPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "To test creating a table works when there are no errors",
+    "description": "",
+    "id": "to-test-creating-a-table-works-when-there-are-no-errors",
+    "keyword": "Feature",
+    "uri": "createTable.feature"
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 179593,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberWebDriver.initialize()"
+            }
+          },
+          {
+            "result": {
+              "duration": 174394,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CucumberWebDriver.initialize()"
+            }
+          }
+        ],
+        "line": 3,
+        "name": "Check login form is validated when there are no errors",
+        "description": "",
+        "id": "to-test-joining-a-game-works-when-there-are-no-errors;check-login-form-is-validated-when-there-are-no-errors",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 3644124694,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I am on my Blackjack website",
+            "match": {
+              "location": "CucumberStepDefinitions.navigateToSite()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 4431680285,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I click on the username form",
+            "match": {
+              "location": "CucumberStepDefinitions.clickOnUserNameForm()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 4886913308,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I populate the username form",
+            "match": {
+              "location": "CucumberStepDefinitions.populateUserNameForm()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5303782332,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I should be on join game room page",
+            "match": {
+              "location": "CucumberStepDefinitions.goToGameTablePage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 9,
+        "name": "Check if user joins room when there are no errors",
+        "description": "",
+        "id": "to-test-joining-a-game-works-when-there-are-no-errors;check-if-user-joins-room-when-there-are-no-errors",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 13355397493,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "I am already logged in",
+            "match": {
+              "location": "CucumberStepDefinitions.loggedIn()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 4069940308,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "I click on the join table button",
+            "match": {
+              "location": "CucumberStepDefinitions.clickOnJoinTable()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3888501292,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "I should be on game room page",
+            "match": {
+              "location": "CucumberStepDefinitions.inGameRoom()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "To test joining a game works when there are no errors",
+    "description": "",
+    "id": "to-test-joining-a-game-works-when-there-are-no-errors",
+    "keyword": "Feature",
+    "uri": "joinTable.feature"
+  }
+]
